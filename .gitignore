@@ -66,3 +66,5 @@ Project Paper/Library/SourceAssetDB
 Project Paper/Library/shadercompiler-UnityShaderCompiler.exe2.log
 *.log
 *.log
+*.dll
+*.dll
