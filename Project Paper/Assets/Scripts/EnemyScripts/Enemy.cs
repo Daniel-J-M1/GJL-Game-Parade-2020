@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public Transform PlayerPosition;
+
+    //Variables
+    private Transform PlayerPosition;
+
     GameObject Player;
+
     private Rigidbody Rigid;
+
     private Vector3 Movement;
+
     public float MoveSpeed = 5f;
 
 
@@ -15,6 +21,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Assigning Variable Values
         Player = GameObject.FindGameObjectWithTag("Player");
         PlayerPosition = Player.transform;
 
@@ -24,11 +31,8 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Enemy Looking and Moving in the Player's Direction
         Vector3 Direction = PlayerPosition.position - transform.position;
-        Debug.Log(Direction);
-        //Look = (PlayerPosition.position);
-        //float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        //Rigid.rotation = Quaternion.Euler(0f, angle, 0f);
         transform.LookAt(PlayerPosition.position);
         Direction.Normalize();
         Movement = Direction;
@@ -36,11 +40,13 @@ public class Enemy : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //Move the Enemy
         MoveCharacter(Movement);
     }
 
     void MoveCharacter(Vector3 Direction)
     {
+        //Enemy Movement Speed
         Rigid.MovePosition(transform.position + (Direction * MoveSpeed * Time.deltaTime));
     }
 
