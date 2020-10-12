@@ -13,17 +13,13 @@ public class PlayerRotation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float horizontal;
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
 
-        horizontal = Input.GetAxis("Horizontal");
+        Vector3 movement = new Vector3(horizontal, 0, vertical);
 
-        if (horizontal > 0)
-        {
-            transform.rotation = Quaternion.Euler(0, 135, 0);
-        }
-        else if (horizontal < 0)
-        {
-            transform.rotation = Quaternion.Euler(0, 315, 0);
-        }
+        if (movement.magnitude != 0)
+            transform.rotation = Quaternion.LookRotation(movement);
+        
     }
 }
