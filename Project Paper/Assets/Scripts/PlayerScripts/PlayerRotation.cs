@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerRotation : MonoBehaviour
 {
+    public float turnSpeed = 15;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,13 +14,14 @@ public class PlayerRotation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
 
         Vector3 movement = new Vector3(horizontal, 0, vertical);
+        var rotation = Quaternion.LookRotation(movement);
 
         if (movement.magnitude != 0)
-            transform.rotation = Quaternion.LookRotation(movement);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * turnSpeed);
         
     }
 }
