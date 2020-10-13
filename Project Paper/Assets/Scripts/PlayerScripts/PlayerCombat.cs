@@ -6,14 +6,13 @@ public class PlayerCombat : MonoBehaviour
 {
     public float swingSpeed = 5;
     public float swingRadious = 160;
-    float angleSwung = 0;
-    enum AttackState
+    public enum AttackState
     {
         AS_IDLE,
         AS_ATTACKING
     }
 
-    AttackState attackState;
+    public AttackState attackState;
     public GameObject player;
     Transform currentAnimation;
 
@@ -33,6 +32,10 @@ public class PlayerCombat : MonoBehaviour
 
         //left click
         if (Input.GetMouseButtonDown(0) && attackState == AttackState.AS_IDLE)
+        {
+            attackState = AttackState.AS_ATTACKING;
+        }
+        if (Input.GetKeyDown("space") && attackState == AttackState.AS_IDLE)
         {
             attackState = AttackState.AS_ATTACKING;
         }
@@ -56,21 +59,9 @@ public class PlayerCombat : MonoBehaviour
             {
                 transform.rotation = player.transform.rotation;
                 attackState = AttackState.AS_IDLE;
-                angleSwung = 0;
             }
         }
-    }
+        
+    }    
 
-    float ClampAngle(float angle)
-    {
-        float returnAngle = angle;
-        if (angle < 0)
-            returnAngle = (angle + (360 * ((angle / 360) + 1)));
-        else if (angle > 360)
-            returnAngle = (angle - (360 * (angle / 360)));
-        else if (returnAngle == 360)
-            returnAngle = 0;
-
-        return returnAngle;
-    }
 }
