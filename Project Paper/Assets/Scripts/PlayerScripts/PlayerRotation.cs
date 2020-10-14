@@ -4,24 +4,24 @@ using UnityEngine;
 
 public class PlayerRotation : MonoBehaviour
 {
+    GameObject player;
+    Camera cam;
     public float turnSpeed = 15;
     // Start is called before the first frame update
     void Start()
     {
-        
+        cam = Camera.main;
     }
 
     // Update is called once per frame
     void Update()
     {
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
-
-        Vector3 movement = new Vector3(horizontal, 0, vertical);
-        var rotation = Quaternion.LookRotation(movement);
-
-        if (movement.magnitude != 0)
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * turnSpeed);
-        
+        Vector3 mouseWroldPos = cam.ScreenToWorldPoint(Input.mousePosition + Vector3.forward * 10);
+        float angle = AngleBetweenTwoPoints(transform.position, mouseWroldPos);
+        transform.rotation = Quaternion.Euler(new Vector3(0, -angle - 90, 0));
+    }
+    float AngleBetweenTwoPoints(Vector3 a, Vector3 b)
+    {
+        return Mathf.Atan2(a.y - b.y, a.x - b.x) * Mathf.Rad2Deg;
     }
 }

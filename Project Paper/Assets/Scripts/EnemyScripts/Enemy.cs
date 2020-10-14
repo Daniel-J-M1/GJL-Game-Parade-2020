@@ -38,7 +38,7 @@ public class Enemy : MonoBehaviour
         
         if (Health <= 0)
             Destroy(this.gameObject);
-        print(Health);
+
         //Enemy Looking and Moving in the Player's Direction
         Vector3 Direction = PlayerPosition.position - transform.position;
         
@@ -65,22 +65,11 @@ public class Enemy : MonoBehaviour
 
     void MoveCharacter(Vector3 Direction)
     {
-        //Enemy Movement Speed
-        //Rigid.MovePosition(transform.position + (Direction * MoveSpeed * Time.deltaTime));
         Rigid.AddForce(Direction * Acceleration * 100 * Time.deltaTime);
 
         Rigid.velocity = new Vector3(
             Mathf.Clamp(Rigid.velocity.x, -MaxSpeed, MaxSpeed), 0,
             Mathf.Clamp(Rigid.velocity.z, -MaxSpeed, MaxSpeed));
-
-        //if ((Rigid.velocity.x < MaxSpeed && -Rigid.velocity.x > -MaxSpeed) || (Rigid.velocity.z < MaxSpeed && -Rigid.velocity.z > -MaxSpeed))
-        //{
-        //    Rigid.AddForce(Direction * Acceleration * 100 * Time.deltaTime);
-        //    //Rigid.velocity = currForce;
-        //}
-        //else
-        //{
-        //}
     }
 
     public void AlterHealth(float altHP)
