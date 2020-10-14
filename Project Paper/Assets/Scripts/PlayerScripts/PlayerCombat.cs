@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerCombat : MonoBehaviour
 {
     [SerializeField]
-    float swingSpeed = 5;
+    float swingSpeed = 0.5f;
 
     [SerializeField] 
     float swingRadious = 160;
@@ -25,13 +25,13 @@ public class PlayerCombat : MonoBehaviour
     float MaxComboDelay = 1f;
     float comboDelayTimer;
     bool attackFinished = true;
+    bool attacking = false;
     Vector3 baseRotation;
 
     // Start is called before the first frame update
     void Start()
     {
         attackState = AttackState.AS_IDLE;
-        swingRadious += 10;
         baseRotation = new Vector3(0, 0, 0);
     }
 
@@ -45,27 +45,30 @@ public class PlayerCombat : MonoBehaviour
         
         if (attackFinished) //inputs
         {
-            if ((Input.GetMouseButtonDown(0) && attackState == AttackState.AS_ATTACK2) ||
+            if (!attacking)
+            {
+                if ((Input.GetMouseButtonDown(0) && attackState == AttackState.AS_ATTACK2) ||
                 Input.GetKeyDown("space") && attackState == AttackState.AS_ATTACK2)
-            {
-                attackFinished = false;
-                attackState = AttackState.AS_ATTACK3;
-                comboDelayTimer = MaxComboDelay;
+                {
+                    attackFinished = false;
+                    attackState = AttackState.AS_ATTACK3;
+                    comboDelayTimer = MaxComboDelay;
+                }
+                if ((Input.GetMouseButtonDown(0) && attackState == AttackState.AS_ATTACK1) ||
+                    (Input.GetKeyDown("space") && attackState == AttackState.AS_ATTACK1))
+                {
+                    attackFinished = false;
+                    attackState = AttackState.AS_ATTACK2;
+                    comboDelayTimer = MaxComboDelay;
+                }
+                if ((Input.GetMouseButtonDown(0) && attackState == AttackState.AS_IDLE) ||
+                    (Input.GetKeyDown("space") && attackState == AttackState.AS_IDLE))
+                {
+                    attackFinished = false;
+                    attackState = AttackState.AS_ATTACK1;
+                    comboDelayTimer = MaxComboDelay;
+                }
             }
-            if ((Input.GetMouseButtonDown(0) && attackState == AttackState.AS_ATTACK1) ||
-                (Input.GetKeyDown("space") && attackState == AttackState.AS_ATTACK1))
-            {
-                attackFinished = false;
-                attackState = AttackState.AS_ATTACK2;
-                comboDelayTimer = MaxComboDelay;
-            }
-            if ((Input.GetMouseButtonDown(0) && attackState == AttackState.AS_IDLE) ||
-                (Input.GetKeyDown("space") && attackState == AttackState.AS_IDLE))
-            {
-                attackFinished = false;
-                attackState = AttackState.AS_ATTACK1;
-                comboDelayTimer = MaxComboDelay;
-            }            
         }
 
         if (attackState == AttackState.AS_ATTACK3 && !attackFinished)
@@ -118,7 +121,7 @@ public class PlayerCombat : MonoBehaviour
         }
         if (attackState == AttackState.AS_ATTACK1 && !attackFinished)
         {
-            StartCoroutine(Attack1());
+            StartCoroutine(Attack1(new Vector3(0, swingRadious, 0)));
 
             /*
             //rotate towards the end angle
@@ -153,24 +156,23 @@ public class PlayerCombat : MonoBehaviour
             }
         }
     }
-    IEnumerator Attack1()
+    IEnumerator Attack1(Vector3 rot)
     {
-        while (transform.rotation.y < swingRadious)
+        attacking = true;
+        Quaternion start = transform.rotation;
+        Quaternion destination = start * Quaternion.Euler(rot);
+        float startTime = Time.time;
+        float percentComplete = 0f;
+        while (percentComplete <= 1.0f)
         {
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, swingRadious, 0), swingSpeed * Time.deltaTime);
+            percentComplete = (Time.time - startTime) / swingSpeed;
+            transform.rotation = Quaternion.Slerp(start, destination, percentComplete);
             yield return null;
         }
 
-        if (transform.rotation.y >= player.transform.rotation.y + swingRadious)
-        {
-            if (attackState == AttackState.AS_ATTACK3)
-                attackState = AttackState.AS_IDLE;
-            attackFinished = true;
-            comboDelayTimer = MaxComboDelay;
-            transform.rotation = Quaternion.Euler(0, 180, 0);
-        }
+        transform.rotation = start;
+        attacking = false;
         yield return null;
-
     }
 }
 
