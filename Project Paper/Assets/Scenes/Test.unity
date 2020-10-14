@@ -346,7 +346,7 @@ MonoBehaviour:
   Enemy: {fileID: 9021585803772053676, guid: 0fb5c54e98954ff4b9d7aeff640c5bac, type: 3}
   SpawnArea: {fileID: 825881171}
   WaveLimit: 2
-  GroupNo: 0
+  GroupNo: 1
   Members: 3
   Rest: 0
 --- !u!1001 &1780604873
@@ -390,7 +390,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2844468617627982916, guid: b3bef9079a31def4aa25d3803f524a7a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.4
+      value: 1.031
       objectReference: {fileID: 0}
     - target: {fileID: 2844468617627982916, guid: b3bef9079a31def4aa25d3803f524a7a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -434,7 +434,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2844468617864849269, guid: b3bef9079a31def4aa25d3803f524a7a, type: 3}
       propertyPath: swingSpeed
-      value: 12.44
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2844468617864849269, guid: b3bef9079a31def4aa25d3803f524a7a, type: 3}
+      propertyPath: MaxComboDelay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2844468617864849270, guid: b3bef9079a31def4aa25d3803f524a7a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.467
+      objectReference: {fileID: 0}
+    - target: {fileID: 2844468617864849270, guid: b3bef9079a31def4aa25d3803f524a7a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.047
+      objectReference: {fileID: 0}
+    - target: {fileID: 2844468617864849270, guid: b3bef9079a31def4aa25d3803f524a7a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.566
+      objectReference: {fileID: 0}
+    - target: {fileID: 7036671578492472477, guid: b3bef9079a31def4aa25d3803f524a7a, type: 3}
+      propertyPath: knockbackStrength
+      value: 500
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3bef9079a31def4aa25d3803f524a7a, type: 3}
@@ -449,7 +469,6 @@ GameObject:
   - component: {fileID: 1872298631}
   - component: {fileID: 1872298634}
   - component: {fileID: 1872298633}
-  - component: {fileID: 1872298632}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -471,20 +490,6 @@ Transform:
   m_Father: {fileID: 416035189}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &1872298632
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1872298630}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1872298633
 MeshRenderer:
   m_ObjectHideFlags: 0
