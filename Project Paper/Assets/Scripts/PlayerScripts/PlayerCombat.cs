@@ -25,18 +25,21 @@ public class PlayerCombat : MonoBehaviour
     float MaxComboDelay = 1f;
     float comboDelayTimer;
     bool attackFinished = true;
-    Transform currentAnimation;
+    Vector3 baseRotation;
 
     // Start is called before the first frame update
     void Start()
     {
         attackState = AttackState.AS_IDLE;
         swingRadious += 10;
+        baseRotation = new Vector3(0, 0, 0);
     }
 
     // Update is called once per frame
     void Update()
     {
+        print(transform.rotation.y);
+        
         float swingMultiplier = 100;
         swingMultiplier *= swingSpeed;
         
@@ -115,6 +118,9 @@ public class PlayerCombat : MonoBehaviour
         }
         if (attackState == AttackState.AS_ATTACK1 && !attackFinished)
         {
+            StartCoroutine(Attack1());
+
+            /*
             //rotate towards the end angle
             transform.RotateAround(transform.position, Vector3.up, swingMultiplier * Time.deltaTime);
 
@@ -135,7 +141,7 @@ public class PlayerCombat : MonoBehaviour
                     attackState = AttackState.AS_IDLE;
                 attackFinished = true;
                 comboDelayTimer = MaxComboDelay;
-            }
+            }*/
         }
 
         if (attackState != AttackState.AS_IDLE && attackFinished)
@@ -146,5 +152,26 @@ public class PlayerCombat : MonoBehaviour
                 attackState = AttackState.AS_IDLE;
             }
         }
-    }   
+    }
+    IEnumerator Attack1()
+    {
+        while (transform.rotation.y < swingRadious)
+        {
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, swingRadious, 0), swingSpeed * Time.deltaTime);
+            yield return null;
+        }
+
+        if (transform.rotation.y >= player.transform.rotation.y + swingRadious)
+        {
+            if (attackState == AttackState.AS_ATTACK3)
+                attackState = AttackState.AS_IDLE;
+            attackFinished = true;
+            comboDelayTimer = MaxComboDelay;
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+        yield return null;
+
+    }
 }
+
+

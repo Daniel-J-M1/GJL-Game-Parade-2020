@@ -27,6 +27,8 @@ public class Spawner : MonoBehaviour
     Vector3 Size;
     Vector3 Centre;
 
+    GameObject[] spawnPoints;
+
     private void Awake()
     {
         //Setting the Spawn Area Variables
@@ -43,13 +45,15 @@ public class Spawner : MonoBehaviour
     {
         //Starting the First Wave
         WaveStart = true;
+        spawnPoints = GameObject.FindGameObjectsWithTag("Spawn Point");
     }
 
     // Setting up Random Enemy Spawn Locations Within Range
     private Vector3 GetRandomPosition()
     {
-        Vector3 RandomPosition = new Vector3(Random.Range(-Size.x / 2, Size.x / 2), 1, Random.Range(-Size.z / 2, Size.z / 2));
-        return Centre + RandomPosition;
+        //Vector3 RandomPosition = new Vector3(Random.Range(-Size.x / 2, Size.x / 2), 1, Random.Range(-Size.z / 2, Size.z / 2));
+        Vector3 randPos = spawnPoints[Random.Range(0, spawnPoints.Length)].transform.position;
+        return randPos;
     }
 
     //Starting and Stopping Coroutines
