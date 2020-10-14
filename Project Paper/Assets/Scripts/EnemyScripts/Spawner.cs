@@ -48,7 +48,7 @@ public class Spawner : MonoBehaviour
     // Setting up Random Enemy Spawn Locations Within Range
     private Vector3 GetRandomPosition()
     {
-        Vector3 RandomPosition = new Vector3(Random.Range(-Size.x / 2, Size.x / 2), 1, Random.Range(-Size.z / 2, Size.z / 2));
+        Vector3 RandomPosition = new Vector3(Random.Range(-Size.x / 2, Size.x / 2), 2, Random.Range(-Size.z / 2, Size.z / 2));
         return Centre + RandomPosition;
     }
 
