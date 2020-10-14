@@ -10,6 +10,8 @@ public class Spawner : MonoBehaviour
 
     public BoxCollider SpawnArea;
 
+    private Enemy Death;
+
     private int NoSpawned = 0;
 
     //Float Variables
@@ -17,8 +19,10 @@ public class Spawner : MonoBehaviour
     public float GroupNo;
     public float Members;
     public float Rest;
+    private float NoKilled = 0f;
 
     bool WaveStart;
+    bool EnemyKilled;
 
     Vector3 Size;
     Vector3 Centre;
@@ -55,16 +59,21 @@ public class Spawner : MonoBehaviour
         {
             StopCoroutine(NewWave());
             StartCoroutine(EnemySpawn());
+
             WaveStart = false;
         }
         else
         {
-            if (NoSpawned == (Members * GroupNo))
+
+            if (NoSpawned == (Members * WaveLimit))
             {
                 StopCoroutine(EnemySpawn());
-                if (NoSpawned == 0)
+                if (NoKilled == (Members * WaveLimit))
                 {
+                    print("false");
                     StartCoroutine(NewWave());
+                    NoSpawned = 0;
+                    NoKilled = 0;
                 }
             }
         }
@@ -74,6 +83,7 @@ public class Spawner : MonoBehaviour
     //Spawn Control
     IEnumerator EnemySpawn()
     {
+        print("Start");
         while (NoSpawned < (Members * WaveLimit))
         {
             if (NoSpawned < (Members * GroupNo))
@@ -95,9 +105,18 @@ public class Spawner : MonoBehaviour
     //Setting Up New Wave
     IEnumerator NewWave()
     {
+        print("NewWave");
         yield return new WaitForSeconds(Rest);
-        WaveLimit = WaveLimit + 2;
-        GroupNo = 1;
         WaveStart = true;
+        WaveLimit += 1;
+        GroupNo = 1;
+        print("No. " + NoSpawned);
+
+    }
+
+    public void Died()
+    {
+            NoKilled = NoKilled + 1;
+            print(NoKilled);
     }
 }

@@ -10,12 +10,18 @@ public class Enemy : MonoBehaviour
 
     GameObject Player;
 
+    GameObject Area;
+
     private Rigidbody Rigid;
 
     private Vector3 Movement;
 
+    private Spawner Spawn;
+
     public float Acceleration = 5f;
     public float MaxSpeed = 5f;
+
+    public bool Killed = false;
 
     public float Health = 50f;
     bool isInvincible = false;
@@ -30,6 +36,8 @@ public class Enemy : MonoBehaviour
         PlayerPosition = Player.transform;
 
         Rigid = this.GetComponent<Rigidbody>();
+
+        Area = GameObject.FindGameObjectWithTag("Area");
     }
 
     // Update is called once per frame
@@ -37,8 +45,14 @@ public class Enemy : MonoBehaviour
     {
         
         if (Health <= 0)
+        {
             Destroy(this.gameObject);
-        print(Health);
+            Area.gameObject.GetComponent<Spawner>().Died();
+            Killed = true;
+        }
+            
+
+        //print(Health);
         //Enemy Looking and Moving in the Player's Direction
         Vector3 Direction = PlayerPosition.position - transform.position;
         
@@ -66,21 +80,11 @@ public class Enemy : MonoBehaviour
     void MoveCharacter(Vector3 Direction)
     {
         //Enemy Movement Speed
-        //Rigid.MovePosition(transform.position + (Direction * MoveSpeed * Time.deltaTime));
         Rigid.AddForce(Direction * Acceleration * 100 * Time.deltaTime);
 
         Rigid.velocity = new Vector3(
             Mathf.Clamp(Rigid.velocity.x, -MaxSpeed, MaxSpeed), 0,
             Mathf.Clamp(Rigid.velocity.z, -MaxSpeed, MaxSpeed));
-
-        //if ((Rigid.velocity.x < MaxSpeed && -Rigid.velocity.x > -MaxSpeed) || (Rigid.velocity.z < MaxSpeed && -Rigid.velocity.z > -MaxSpeed))
-        //{
-        //    Rigid.AddForce(Direction * Acceleration * 100 * Time.deltaTime);
-        //    //Rigid.velocity = currForce;
-        //}
-        //else
-        //{
-        //}
     }
 
     public void AlterHealth(float altHP)
