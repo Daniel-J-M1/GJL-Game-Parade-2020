@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCollider : MonoBehaviour
+public class WeaponCollider : MonoBehaviour
 {
     public float knockbackStrength = 100;
     // Start is called before the first frame update
