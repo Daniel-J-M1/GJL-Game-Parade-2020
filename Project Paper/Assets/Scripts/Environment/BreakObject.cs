@@ -6,6 +6,7 @@ public class BreakObject : MonoBehaviour
 {
 
     public GameObject Fractured;
+    public float Shatter;
 
     // Update is called once per frame
     void Update()
@@ -16,7 +17,12 @@ public class BreakObject : MonoBehaviour
 
     void BreakAsset()
     {
-        Instantiate(Fractured, transform.position, transform.rotation);
+        GameObject Frac = Instantiate(Fractured, transform.position, transform.rotation);
+        foreach(Rigidbody RB in Frac.GetComponentsInChildren<Rigidbody>())
+        {
+            Vector3 Force = (RB.transform.position = transform.position).normalized * Shatter;
+            RB.AddForce(Force);
+        }
         Destroy(gameObject);
     }
 
