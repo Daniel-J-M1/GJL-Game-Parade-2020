@@ -6,17 +6,9 @@ public class Enemy : MonoBehaviour
 {
 
     //Variables
-    private Transform PlayerPosition;
-
     GameObject Player;
-
-    GameObject Area;
-
     private Rigidbody Rigid;
-
     private Vector3 Movement;
-
-    private Spawner Spawn;
 
     public float Acceleration = 5f;
     public float MaxSpeed = 5f;
@@ -33,11 +25,9 @@ public class Enemy : MonoBehaviour
     {
         // Assigning Variable Values
         Player = GameObject.FindGameObjectWithTag("Player");
-        PlayerPosition = Player.transform;
-
         Rigid = this.GetComponent<Rigidbody>();
-
-        Area = GameObject.FindGameObjectWithTag("Area");
+        MaxSpeed = MaxSpeed + Random.Range(-2f, 2f);
+        Acceleration = Acceleration + Random.Range(-2f, 2f);
     }
 
     // Update is called once per frame
@@ -47,16 +37,16 @@ public class Enemy : MonoBehaviour
         if (Health <= 0)
         {
             Destroy(this.gameObject);
-            Area.gameObject.GetComponent<Spawner>().Died();
+            Player.gameObject.GetComponent<Spawner>().Died();
             Killed = true;
         }
             
 
         //print(Health);
         //Enemy Looking and Moving in the Player's Direction
-        Vector3 Direction = PlayerPosition.position - transform.position;
+        Vector3 Direction = Player.transform.position - transform.position;
         
-        transform.LookAt(PlayerPosition.position);
+        transform.LookAt(new Vector3(Player.transform.position.x, transform.position.y, Player.transform.position.z));
         Direction.Normalize();
         Direction.y = 0;
         Movement = Direction;
@@ -104,7 +94,7 @@ public class Enemy : MonoBehaviour
 
     public void KnockBack(float intensity)
     {
-        Vector3 dir = transform.position - PlayerPosition.position;
+        Vector3 dir = transform.position - Player.transform.position;
         dir.y = 0;
         dir.Normalize();
         Rigid.velocity = dir * intensity;

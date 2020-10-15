@@ -223,5 +223,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Acceleration: 10
   MaxSpeed: 5
+  Killed: 0
   Health: 50
   maxIvincibilityTime: 0.2
