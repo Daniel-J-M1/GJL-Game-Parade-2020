@@ -43,111 +43,49 @@ public class PlayerCombat : MonoBehaviour
         float swingMultiplier = 100;
         swingMultiplier *= swingSpeed;
         
-        if (attackFinished) //inputs
+        if (!attacking)
         {
-            if (!attacking)
+            if ((Input.GetMouseButtonDown(0) && attackState == AttackState.AS_ATTACK2) ||
+            Input.GetKeyDown("space") && attackState == AttackState.AS_ATTACK2)
             {
-                if ((Input.GetMouseButtonDown(0) && attackState == AttackState.AS_ATTACK2) ||
-                Input.GetKeyDown("space") && attackState == AttackState.AS_ATTACK2)
-                {
-                    attackFinished = false;
-                    attackState = AttackState.AS_ATTACK3;
-                    comboDelayTimer = MaxComboDelay;
-                }
-                if ((Input.GetMouseButtonDown(0) && attackState == AttackState.AS_ATTACK1) ||
-                    (Input.GetKeyDown("space") && attackState == AttackState.AS_ATTACK1))
-                {
-                    attackFinished = false;
-                    attackState = AttackState.AS_ATTACK2;
-                    comboDelayTimer = MaxComboDelay;
-                }
-                if ((Input.GetMouseButtonDown(0) && attackState == AttackState.AS_IDLE) ||
-                    (Input.GetKeyDown("space") && attackState == AttackState.AS_IDLE))
-                {
-                    attackFinished = false;
-                    attackState = AttackState.AS_ATTACK1;
-                    comboDelayTimer = MaxComboDelay;
-                }
+                attackState = AttackState.AS_ATTACK3;
+                attacking = true;
+                StartCoroutine(Attack(new Vector3(0, swingRadious, 0), transform.rotation));
+                comboDelayTimer = MaxComboDelay;
             }
-        }
-
-        if (attackState == AttackState.AS_ATTACK3 && !attackFinished)
-        {
-            //rotate towards the end angle
-            transform.RotateAround(transform.position, Vector3.up, swingMultiplier * Time.deltaTime);
-
-            var targetAngle = swingRadious; //end angle
-            float currAngle = transform.rotation.eulerAngles.y; //current angle
-            float originAngle = player.transform.rotation.eulerAngles.y; //angle of player (so origin of our angle)     
-
-            //clamps between 0 - 360
-            var clampedTargetAngle = targetAngle + originAngle;
-            if (clampedTargetAngle > 360)
-                clampedTargetAngle -= 360;
-
-            //check if its close to the target angle
-            if (currAngle > clampedTargetAngle - 7 && currAngle < clampedTargetAngle + 7)
+            if ((Input.GetMouseButtonDown(0) && attackState == AttackState.AS_ATTACK1) ||
+                (Input.GetKeyDown("space") && attackState == AttackState.AS_ATTACK1))
             {
-                transform.rotation = player.transform.rotation;
-                if (attackState == AttackState.AS_ATTACK3)
-                    attackState = AttackState.AS_IDLE;
-                attackFinished = true;
+                attackState = AttackState.AS_ATTACK2;
+                attacking = true;
+                StartCoroutine(Attack(new Vector3(0, swingRadious, 0), transform.rotation));
+                comboDelayTimer = MaxComboDelay;
+            }
+            if ((Input.GetMouseButtonDown(0) && attackState == AttackState.AS_IDLE) ||
+                (Input.GetKeyDown("space") && attackState == AttackState.AS_IDLE))
+            {
+                attackState = AttackState.AS_ATTACK1;
+                attacking = true;
+                StartCoroutine(Attack(new Vector3(0, swingRadious, 0), transform.rotation));
                 comboDelayTimer = MaxComboDelay;
             }
         }
-        if (attackState == AttackState.AS_ATTACK2 && !attackFinished)
+        
+
+        if (attackState == AttackState.AS_ATTACK3 && !attacking)
         {
-            //rotate towards the end angle
-            transform.RotateAround(transform.position, Vector3.up, swingMultiplier * Time.deltaTime);
-
-            var targetAngle = swingRadious; //end angle
-            float currAngle = transform.rotation.eulerAngles.y; //current angle
-            float originAngle = player.transform.rotation.eulerAngles.y; //angle of player (so origin of our angle)     
-
-            //clamps between 0 - 360
-            var clampedTargetAngle = targetAngle + originAngle;
-            if (clampedTargetAngle > 360)
-                clampedTargetAngle -= 360;
-
-            //check if its close to the target angle
-            if (currAngle > clampedTargetAngle - 10 && currAngle < clampedTargetAngle + 10)
-            {
-                transform.rotation = player.transform.rotation;
-                if (attackState == AttackState.AS_ATTACK3)
-                    attackState = AttackState.AS_IDLE;
-                attackFinished = true;
-                comboDelayTimer = MaxComboDelay;
-            }
+            
         }
-        if (attackState == AttackState.AS_ATTACK1 && !attackFinished)
+        if (attackState == AttackState.AS_ATTACK2 && !attacking)
         {
-            StartCoroutine(Attack1(new Vector3(0, swingRadious, 0)));
-
-            /*
-            //rotate towards the end angle
-            transform.RotateAround(transform.position, Vector3.up, swingMultiplier * Time.deltaTime);
-
-            var targetAngle = swingRadious; //end angle
-            float currAngle = transform.rotation.eulerAngles.y; //current angle
-            float originAngle = player.transform.rotation.eulerAngles.y; //angle of player (so origin of our angle)     
-
-            //clamps between 0 - 360
-            var clampedTargetAngle = targetAngle + originAngle;
-            if (clampedTargetAngle > 360)
-                clampedTargetAngle -= 360;
-
-            //check if its close to the target angle
-            if (currAngle > clampedTargetAngle - 7 && currAngle < clampedTargetAngle + 7)
-            {
-                transform.rotation = player.transform.rotation;
-                if(attackState == AttackState.AS_ATTACK3)
-                    attackState = AttackState.AS_IDLE;
-                attackFinished = true;
-                comboDelayTimer = MaxComboDelay;
-            }*/
+            
         }
+        if (attackState == AttackState.AS_ATTACK1 && !attacking)
+        {
+        }
+        
 
-        if (attackState != AttackState.AS_IDLE && attackFinished)
+        if (attackState != AttackState.AS_IDLE && !attacking)
         {
             comboDelayTimer -= Time.deltaTime;
             if (comboDelayTimer < 0)
@@ -156,10 +94,8 @@ public class PlayerCombat : MonoBehaviour
             }
         }
     }
-    IEnumerator Attack1(Vector3 rot)
+    IEnumerator Attack(Vector3 rot, Quaternion start)
     {
-        attacking = true;
-        Quaternion start = transform.rotation;
         Quaternion destination = start * Quaternion.Euler(rot);
         float startTime = Time.time;
         float percentComplete = 0f;
@@ -170,10 +106,11 @@ public class PlayerCombat : MonoBehaviour
             yield return null;
         }
 
+        if (attackState == AttackState.AS_ATTACK3)
+            attackState = AttackState.AS_IDLE;
         transform.rotation = start;
         attacking = false;
+        comboDelayTimer = MaxComboDelay;
         yield return null;
     }
 }
-
-
