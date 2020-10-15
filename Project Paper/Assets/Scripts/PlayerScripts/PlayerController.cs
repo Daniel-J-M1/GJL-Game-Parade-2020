@@ -17,14 +17,15 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float multiplier = speed * 100;
         Vector3 input = Vector3.zero;
         input.x = Input.GetAxisRaw("Horizontal");
         input.z = Input.GetAxisRaw("Vertical");
 
         Vector3 direction = input.normalized;
 
-        Vector3 movement = direction * speed * Time.deltaTime;
+        Vector3 movement = direction * multiplier * Time.deltaTime;
 
-        body.velocity = new Vector3(movement.x * speed, body.velocity.y, movement.z * speed);
+        body.velocity = new Vector3(movement.x, body.velocity.y, movement.z);
     }
 }

@@ -366,7 +366,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
-  speed: 30
+  speed: 10
 --- !u!54 &7036671578786709563
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -398,7 +398,7 @@ MonoBehaviour:
   Enemy: {fileID: 9021585803772053676, guid: 0fb5c54e98954ff4b9d7aeff640c5bac, type: 3}
   waveEnemyCount: 3
   waveFrequency: 5
-  difficulty: 1
+  difficulty: 1.1
 --- !u!1 &2844468617864849271
 GameObject:
   m_ObjectHideFlags: 0
@@ -443,8 +443,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 767e1a31f8fa9c74dac8879324b0a192, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  swingSpeed: 0.15
-  swingRadious: 90
+  swingSpeed: 0.2
+  swingRadious: 120
   attackState: 0
   player: {fileID: 2844468617326260855}
   MaxComboDelay: 0.5

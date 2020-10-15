@@ -8,7 +8,7 @@ public class Spawner : MonoBehaviour
 
     public float waveEnemyCount = 3;
     public float waveFrequency = 5;
-    public float difficulty = 1;
+    public float difficulty = 1.3f;
     int currentlyAlive = 0;
     float waveTimer = 2;
     int currentWave = 1;
@@ -39,25 +39,25 @@ public class Spawner : MonoBehaviour
             switch (currentWave)
             {
                 case 1:
-                    StartCoroutine(SpawnWave((float)waveEnemyCount * difficulty));
+                    StartCoroutine(SpawnWave((float)waveEnemyCount));
                     break;
                 case 2:
-                    StartCoroutine(SpawnWave((float)waveEnemyCount * difficulty));
+                    StartCoroutine(SpawnWave((float)waveEnemyCount));
                     break;
                 case 3:
-                    StartCoroutine(SpawnWave((float)waveEnemyCount * difficulty));
+                    StartCoroutine(SpawnWave((float)waveEnemyCount));
                     break;
                 case 4:
-                    StartCoroutine(SpawnWave((float)waveEnemyCount * difficulty));
+                    StartCoroutine(SpawnWave((float)waveEnemyCount));
                     break;
                 case 5:
-                    StartCoroutine(SpawnWave((float)waveEnemyCount * difficulty));
+                    StartCoroutine(SpawnWave((float)waveEnemyCount));
                     break;
                 case 6:
-                    StartCoroutine(SpawnWave((float)waveEnemyCount * difficulty));
+                    StartCoroutine(SpawnWave((float)waveEnemyCount));
                     break;
                 case 7:
-                    StartCoroutine(SpawnWave((float)waveEnemyCount * difficulty));
+                    StartCoroutine(SpawnWave((float)waveEnemyCount));
                     break;
                 default:
                     break;
@@ -76,9 +76,8 @@ public class Spawner : MonoBehaviour
             yield return null;
         }
 
-        waveEnemyCount += 1;
-        difficulty *= 1.05f;
-        waveTimer = waveFrequency * difficulty;
+        waveEnemyCount *= difficulty;
+        waveTimer = waveFrequency * 1.2f;
         currentWave++;
         yield return null;
     }

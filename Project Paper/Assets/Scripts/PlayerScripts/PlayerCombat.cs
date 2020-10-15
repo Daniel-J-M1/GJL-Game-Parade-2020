@@ -49,7 +49,10 @@ public class PlayerCombat : MonoBehaviour
                 attackState = AttackState.AS_ATTACK3;
                 attacking = true;
                 Quaternion startRot = player.transform.rotation * Quaternion.Euler(10, 0, -90);
-                StartCoroutine(Attack(new Vector3(swingRadious * 1.9f, 0, 0), startRot));
+                float radClamp = swingRadious * 1.5f;
+                if (radClamp >= 180)
+                    radClamp = 179;
+                StartCoroutine(Attack(new Vector3(radClamp, 0, 0), startRot));
                 comboDelayTimer = MaxComboDelay;
             }
             if ((Input.GetMouseButtonDown(0) && attackState == AttackState.AS_ATTACK1) ||
