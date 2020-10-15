@@ -37,9 +37,7 @@ public class PlayerCombat : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        print(transform.rotation.y);
-        
+    {     
         float swingMultiplier = 100;
         swingMultiplier *= swingSpeed;
         
