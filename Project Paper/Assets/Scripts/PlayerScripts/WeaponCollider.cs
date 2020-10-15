@@ -15,17 +15,17 @@ public class WeaponCollider : MonoBehaviour
             //PlayerCombat playerCombat = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCombat>();
             if (playerCombat.attackState == PlayerCombat.AttackState.AS_ATTACK1)
             {
-                other.gameObject.GetComponent<Enemy>().AlterHealth(-10);
+                other.gameObject.GetComponent<Enemy>().AlterHealth(-15);
                 other.gameObject.GetComponent<Enemy>().KnockBack(knockbackStrength);
             }
             if (playerCombat.attackState == PlayerCombat.AttackState.AS_ATTACK2)
             {
-                other.gameObject.GetComponent<Enemy>().AlterHealth(-20);
+                other.gameObject.GetComponent<Enemy>().AlterHealth(-30);
                 other.gameObject.GetComponent<Enemy>().KnockBack(knockbackStrength);
             }
             if (playerCombat.attackState == PlayerCombat.AttackState.AS_ATTACK3)
             {
-                other.gameObject.GetComponent<Enemy>().AlterHealth(-40);
+                other.gameObject.GetComponent<Enemy>().AlterHealth(-50);
                 other.gameObject.GetComponent<Enemy>().KnockBack(knockbackStrength);
             }
         }
