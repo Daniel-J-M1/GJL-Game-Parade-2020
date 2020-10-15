@@ -50,7 +50,8 @@ public class PlayerCombat : MonoBehaviour
             {
                 attackState = AttackState.AS_ATTACK3;
                 attacking = true;
-                StartCoroutine(Attack(new Vector3(0, swingRadious, 0), transform.rotation));
+                Quaternion startRot = player.transform.rotation * Quaternion.Euler(10, 0, -90);
+                StartCoroutine(Attack(new Vector3(swingRadious * 1.9f, 0, 0), startRot));
                 comboDelayTimer = MaxComboDelay;
             }
             if ((Input.GetMouseButtonDown(0) && attackState == AttackState.AS_ATTACK1) ||
@@ -58,7 +59,8 @@ public class PlayerCombat : MonoBehaviour
             {
                 attackState = AttackState.AS_ATTACK2;
                 attacking = true;
-                StartCoroutine(Attack(new Vector3(0, swingRadious, 0), transform.rotation));
+                Quaternion startRot = player.transform.rotation * Quaternion.Euler(0, 0, 70);
+                StartCoroutine(Attack(new Vector3(swingRadious, 0, 0), startRot));
                 comboDelayTimer = MaxComboDelay;
             }
             if ((Input.GetMouseButtonDown(0) && attackState == AttackState.AS_IDLE) ||
@@ -66,33 +68,20 @@ public class PlayerCombat : MonoBehaviour
             {
                 attackState = AttackState.AS_ATTACK1;
                 attacking = true;
-                StartCoroutine(Attack(new Vector3(0, swingRadious, 0), transform.rotation));
+                Quaternion startRot = player.transform.rotation * Quaternion.Euler(0, 0, -20);
+                StartCoroutine(Attack(new Vector3(swingRadious, 0, swingRadious / 4), startRot));
                 comboDelayTimer = MaxComboDelay;
             }
-        }
-        
 
-        if (attackState == AttackState.AS_ATTACK3 && !attacking)
-        {
-            
-        }
-        if (attackState == AttackState.AS_ATTACK2 && !attacking)
-        {
-            
-        }
-        if (attackState == AttackState.AS_ATTACK1 && !attacking)
-        {
-        }
-        
-
-        if (attackState != AttackState.AS_IDLE && !attacking)
-        {
-            comboDelayTimer -= Time.deltaTime;
-            if (comboDelayTimer < 0)
+            if (attackState != AttackState.AS_IDLE)
             {
-                attackState = AttackState.AS_IDLE;
+                comboDelayTimer -= Time.deltaTime;
+                if (comboDelayTimer < 0)
+                    attackState = AttackState.AS_IDLE;
             }
-        }
+        }        
+
+        
     }
     IEnumerator Attack(Vector3 rot, Quaternion start)
     {
@@ -108,7 +97,7 @@ public class PlayerCombat : MonoBehaviour
 
         if (attackState == AttackState.AS_ATTACK3)
             attackState = AttackState.AS_IDLE;
-        transform.rotation = start;
+        transform.rotation = player.transform.rotation;
         attacking = false;
         comboDelayTimer = MaxComboDelay;
         yield return null;
