@@ -17,6 +17,12 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+
+    }
+
+    private void LateUpdate()
+    {
         float multiplier = speed * 100;
         Vector3 input = Vector3.zero;
         input.x = Input.GetAxisRaw("Horizontal");

@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
 {
+
+    [SerializeField]
+    public GameObject projectile;
+
     [SerializeField]
     float swingSpeed = 0.5f;
 
@@ -14,7 +18,8 @@ public class PlayerCombat : MonoBehaviour
         AS_IDLE,
         AS_ATTACK1,
         AS_ATTACK2,
-        AS_ATTACK3
+        AS_ATTACK3,
+        AS_SECONDARY
     }
     public AttackState attackState;
 
@@ -28,20 +33,35 @@ public class PlayerCombat : MonoBehaviour
     bool attacking = false;
     Vector3 baseRotation;
 
+    GameObject penTip;
+    bool spraying = false;
+    float maxSprayAmmo = 100;
+    float sprayAmmo;
+
     // Start is called before the first frame update
     void Start()
     {
         attackState = AttackState.AS_IDLE;
         baseRotation = new Vector3(0, 0, 0);
+        sprayAmmo = maxSprayAmmo;
     }
 
     // Update is called once per frame
     void Update()
     {
+        penTip = GameObject.FindGameObjectWithTag("PenTip");
         float swingMultiplier = 100;
         swingMultiplier *= swingSpeed;
         
-        if (!attacking)
+        if(Input.GetMouseButton(1) && !spraying && sprayAmmo > 0)
+        {
+            spraying = true;
+            Quaternion startRot = player.transform.rotation * Quaternion.Euler(0, 0, 0);
+            StartCoroutine(SprayArm(new Vector3(90, 0, 0), startRot));
+
+        }
+
+        if (!attacking && !Input.GetMouseButton(1))
         {
             if ((Input.GetMouseButtonDown(0) && attackState == AttackState.AS_ATTACK2) ||
             Input.GetKeyDown("space") && attackState == AttackState.AS_ATTACK2)
@@ -84,6 +104,66 @@ public class PlayerCombat : MonoBehaviour
 
         
     }
+
+    IEnumerator Spray()
+    {
+        float timer = 0.02f;
+        while (timer > 0)
+        {
+            timer -= Time.deltaTime;
+            yield return null;
+        }
+        if (sprayAmmo > 0)
+        {
+            Instantiate(projectile, penTip.transform.position, Quaternion.identity);
+            SetAmmo(-1);
+            if (Input.GetMouseButton(1))
+            {
+                StartCoroutine(Spray());
+            }
+            else
+            {
+                transform.rotation = Quaternion.Euler(baseRotation);
+                spraying = false;
+            }
+            yield return null;
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(baseRotation);
+            spraying = false;
+        }
+        yield return null;
+    }
+
+    IEnumerator SprayArm(Vector3 rot, Quaternion start)
+    {
+
+        Quaternion destination = start * Quaternion.Euler(rot);
+        float startTime = Time.time;
+        float percentComplete = 0f;
+        while (percentComplete <= 1.0f)
+        {
+            percentComplete = (Time.time - startTime) / swingSpeed;
+            transform.rotation = Quaternion.Slerp(start, destination, percentComplete);
+            yield return null;
+        }
+        if (sprayAmmo > 0 && Input.GetMouseButton(1))
+        {
+            transform.rotation = player.transform.rotation * Quaternion.Euler(rot);
+            StartCoroutine(Spray());
+            yield return null;
+        }
+        if (sprayAmmo <= 0 || !Input.GetMouseButton(1))
+        {
+            print("Rot back swing");
+            transform.rotation = Quaternion.Euler(baseRotation);
+            spraying = false;
+            yield return null;
+        }
+        yield return null;
+    }
+
     IEnumerator Attack(Vector3 rot, Quaternion start)
     {
         Quaternion destination = start * Quaternion.Euler(rot);
@@ -102,5 +182,10 @@ public class PlayerCombat : MonoBehaviour
         attacking = false;
         comboDelayTimer = MaxComboDelay;
         yield return null;
+    }
+
+    public void SetAmmo(float amount)
+    {
+        sprayAmmo += amount;
     }
 }

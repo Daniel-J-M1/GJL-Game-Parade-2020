@@ -75,6 +75,16 @@ public class Enemy : MonoBehaviour
         
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Projectile")
+        {
+            print("collided");
+            AlterHealth(-3, false);
+            
+        }
+    }
+
     private void FixedUpdate()
     {
         //Move the Enemy
@@ -91,13 +101,16 @@ public class Enemy : MonoBehaviour
             Mathf.Clamp(Rigid.velocity.z, -MaxSpeed, MaxSpeed));
     }
 
-    public void AlterHealth(float altHP)
+    public void AlterHealth(float altHP, bool inv)
     {
         if (!isInvincible)
         {
             Health += altHP;
-            isInvincible = true;
-            invincibleTimer = maxIvincibilityTime;
+            if (inv)
+            {
+                isInvincible = true;
+                invincibleTimer = maxIvincibilityTime;
+            }
         }
     }
 
