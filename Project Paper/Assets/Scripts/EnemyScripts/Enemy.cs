@@ -11,12 +11,12 @@ public class Enemy : MonoBehaviour
     private Vector3 Movement;
 
     public float Acceleration = 5f;
-    public float MaxSpeed = 5f;
+    public float MaxSpeed = 4f;
 
     public bool Killed = false;
 
     float maxHealth;
-    public float Health = 50f;
+    public float Health = 60f;
     bool isInvincible = false;
     public float maxIvincibilityTime = 0.2f;
     float invincibleTimer;
@@ -45,12 +45,12 @@ public class Enemy : MonoBehaviour
         }
         if (Health > maxHealth / 2)
         {
-            float r = 1 - (Health / maxHealth);
+            float r = 1 - (float)(Health / maxHealth);
             indicator.GetComponent<Renderer>().material.color = new Color(r, 1f, 0f, 1f);
         }
         else
         {
-            float g = (Health / maxHealth);
+            float g = (Health / maxHealth * 2);
             indicator.GetComponent<Renderer>().material.color = new Color(1f, g, 0f, 1f);
         }
 
@@ -87,7 +87,7 @@ public class Enemy : MonoBehaviour
         Rigid.AddForce(Direction * Acceleration * 100 * Time.deltaTime);
 
         Rigid.velocity = new Vector3(
-            Mathf.Clamp(Rigid.velocity.x, -MaxSpeed, MaxSpeed), 0,
+            Mathf.Clamp(Rigid.velocity.x, -MaxSpeed, MaxSpeed), Rigid.velocity.y,
             Mathf.Clamp(Rigid.velocity.z, -MaxSpeed, MaxSpeed));
     }
 

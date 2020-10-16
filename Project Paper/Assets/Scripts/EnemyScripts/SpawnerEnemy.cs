@@ -1,57 +1,46 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using UnityEngine;
 
-public class BossEnemy : MonoBehaviour
+public class SpawnerEnemy : MonoBehaviour
 {
-    //Variables
     public GameObject enemy;
     GameObject player;
     int currentPoint;
     private Rigidbody body;
 
     bool moving = false;
-    int maxMoveCount = 1;
-    int currMoveCount = 0;
-    bool attacking = false;
-
-
-    public float spawnerDelay = 10;
-    float currentDelay;
     bool spawning = false;
-    float currEnemiesSpawned = 0;
-    float maxEnemiesSpawned = 2;
 
-    public float chargeSpeed = 50f;
-    public float maxSpeed = 10f;
+    int maxMoveCount = 3;
+    int currMoveCount = 3;
+
+    int maxEnemiesSpawned = 2;
+    int currEnemiesSpawned = 0;
+
+    public float moveSpeed = 10f;
 
     float maxHealth;
-    public float health = 1000f;
+    public float health = 300f;
 
     bool isInvincible = false;
     public float maxIvincibilityTime = 0.2f;
     float invincibleTimer;
 
     Transform indicator;
-
     // Start is called before the first frame update
     void Start()
     {
-        // Assigning Variable Values
         player = GameObject.FindGameObjectWithTag("Player");
         body = GetComponent<Rigidbody>();
         maxHealth = health;
         indicator = transform.Find("Indicator");
         moving = false;
-        attacking = false;
-        currentDelay = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        currentDelay -= Time.deltaTime;
         if (health <= 0)
         {
             Destroy(this.gameObject);
@@ -68,12 +57,12 @@ public class BossEnemy : MonoBehaviour
             indicator.GetComponent<Renderer>().material.color = new Color(1f, g, 0f, 1f);
         }
 
-
-        if (!moving && !attacking && !spawning)
+        if(!moving && !spawning)
         {
-            GameObject randomPoint = GetRandomPoint();   
+            GameObject randomPoint = GetRandomPoint();
             StartCoroutine(Wander(randomPoint));
         }
+
         if (isInvincible)
         {
             invincibleTimer -= Time.deltaTime;
@@ -84,9 +73,76 @@ public class BossEnemy : MonoBehaviour
         }
     }
 
+    Vector3 GetRandomPosition()
+    {
+        Vector3 offset = Random.insideUnitCircle * 5;
+        offset.y = 0f;
+        return transform.position + offset;
+    }
+
+    IEnumerator SpawnEnemies()
+    {
+        spawning = true;
+        float timer = 0.5f;
+        
+        while(timer > 0)
+        {
+            timer -= Time.deltaTime;
+            yield return null;
+        }
+        if (currEnemiesSpawned < maxEnemiesSpawned)
+        {
+            print("spawned");
+            Instantiate(enemy, GetRandomPosition(), Quaternion.identity);
+            StartCoroutine(SpawnEnemies());
+            currEnemiesSpawned++;
+        }
+        else
+        {
+            spawning = false;
+            currEnemiesSpawned = 0;
+            maxEnemiesSpawned = 3 + Random.Range(-1, 1);
+        }
+
+        yield return null;
+    }
+
+    IEnumerator Wander(GameObject spawnPos)
+    {
+        moving = true;
+
+        float timer = 3 + Random.Range(-1, 1); ;
+        while (timer > 0)
+        {
+            timer -= Time.deltaTime;
+            Vector3 Direction = spawnPos.transform.position - transform.position;
+            transform.LookAt(new Vector3(spawnPos.transform.position.x, transform.position.y, spawnPos.transform.position.z));
+            Direction.Normalize();
+            Direction.y = 0;
+
+            body.MovePosition(transform.position + Direction * moveSpeed * Time.deltaTime);
+            yield return null;
+        }
+        currMoveCount++;
+        if(currMoveCount <= maxMoveCount)
+        {
+            StartCoroutine(Wander(GetRandomPoint()));
+        }
+        else
+        {
+            StartCoroutine(SpawnEnemies());
+            maxMoveCount = 2 + Random.Range(-1, 0);
+            currMoveCount = 0;
+            moving = false;
+
+        }
+
+        yield return null;
+    }
+
     GameObject GetRandomPoint()
     {
-        GameObject[] randomPoints = GameObject.FindGameObjectsWithTag("Boss Walk Point");
+        GameObject[] randomPoints = GameObject.FindGameObjectsWithTag("Walk Point");
         int randPointNew = -1;
         randPointNew = Random.Range(0, randomPoints.Length);
 
@@ -97,101 +153,6 @@ public class BossEnemy : MonoBehaviour
         currentPoint = randPointNew;
 
         return randomPoints[currentPoint];
-    }
-
-    Vector3 GetPointInRadious()
-    {
-        Vector3 offset = Random.insideUnitCircle * 10;
-        offset.y = 0f;
-        return transform.position + offset;
-    }
-
-    IEnumerator ChargeAttack()
-    {
-        attacking = true;
-        var playerPos = player.transform.position;
-        Vector3 Direction = player.transform.position - transform.position;
-        Direction.Normalize();
-        Direction.y = 0;
-
-        float timer = 1;
-        while (timer > 0)
-        {
-            timer -= Time.deltaTime;
-            transform.LookAt(new Vector3(playerPos.x, transform.position.y, playerPos.z));
-            yield return null;
-        }
-        float chargeTimer = 0.5f;
-        while (chargeTimer > 0)
-        {
-            chargeTimer -= Time.deltaTime;
-            body.MovePosition(transform.position + Direction * chargeSpeed * Time.deltaTime);
-            yield return null;
-        }
-        attacking = false;
-        yield return null;
-    }
-
-    IEnumerator SpawnEnemies()
-    {
-        spawning = true;
-        float timer = 0.5f;
-
-        while (timer > 0)
-        {
-            timer -= Time.deltaTime;
-            yield return null;
-        }
-        if (currEnemiesSpawned < maxEnemiesSpawned)
-        {
-            print("spawned");
-            Instantiate(enemy, GetPointInRadious(), Quaternion.identity);
-            StartCoroutine(SpawnEnemies());
-            currEnemiesSpawned++;
-        }
-        else
-        {
-            attacking = false;
-            moving = false;
-            spawning = false;
-            currEnemiesSpawned = 0;
-            maxEnemiesSpawned = 2 + Random.Range(-1, 1);
-        }
-        yield return null;
-    }
-
-    IEnumerator Wander(GameObject spawnPos)
-    {
-        moving = true;
-        float timer = 3;
-        while (timer > 0)
-        {
-            timer -= Time.deltaTime;
-            Vector3 Direction = spawnPos.transform.position - transform.position;
-            transform.LookAt(new Vector3(spawnPos.transform.position.x, transform.position.y, spawnPos.transform.position.z));
-            Direction.Normalize();
-            Direction.y = 0;            
-
-            body.MovePosition(transform.position + Direction * maxSpeed * Time.deltaTime);
-            yield return null;
-        }
-        currMoveCount++;
-        if(currentDelay < 0)
-        {
-            currentDelay = spawnerDelay;
-            StartCoroutine(SpawnEnemies());
-        }
-        else if (currMoveCount <= maxMoveCount)
-        {
-            StartCoroutine(Wander(GetRandomPoint()));
-        }
-        else
-        {
-            currMoveCount = 0;
-            moving = false;
-            StartCoroutine(ChargeAttack());
-        }
-        yield return null;
     }
 
     public void AlterHealth(float altHP)
@@ -207,13 +168,5 @@ public class BossEnemy : MonoBehaviour
     void ResetInvincible()
     {
         isInvincible = false;
-    }
-
-    public void KnockBack(float intensity)
-    {
-        Vector3 dir = transform.position - player.transform.position;
-        dir.y = 0;
-        dir.Normalize();
-        body.velocity = dir * intensity;
     }
 }

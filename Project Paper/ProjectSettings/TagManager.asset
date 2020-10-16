@@ -8,6 +8,10 @@ TagManager:
   - Weapon
   - Area
   - Spawn Point
+  - Walk Point
+  - Boss Enemy
+  - Boss Walk Point
+  - Spawner Enemy
   layers:
   - Default
   - TransparentFX
