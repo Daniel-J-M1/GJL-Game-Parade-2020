@@ -17,12 +17,21 @@ public class WallVisibility : MonoBehaviour
 
     void Update()
     {
-        Collider[] colliders = Physics.OverlapSphere(player.transform.position, 10);
+        GameObject[] walls = GameObject.FindGameObjectsWithTag("Wall");
+        foreach (var wall in walls)
+        {
+            var wallColor = wall.GetComponent<MeshRenderer>().material.color;
+            wallColor.a = 1f;
+            wall.GetComponent<MeshRenderer>().material.color = wallColor;
+        }
+        Collider[] colliders = Physics.OverlapSphere(player.transform.position, 5);
         foreach(var collider in colliders)
         {
             if (collider.tag == "Wall")
-                collider.GetComponent<Renderer>().enabled = false;
-                //collider.GetComponent<MeshRenderer>().material.color = new Color(1, 1, 1, 0.2f);
+            {
+                //collider.GetComponent<Renderer>().enabled = false;
+                collider.GetComponent<MeshRenderer>().material.color = new Color(1, 1, 1, 0.5f);
+            }
         }
     }
 
