@@ -15,10 +15,12 @@ public class Enemy : MonoBehaviour
 
     public bool Killed = false;
 
+    float maxHealth;
     public float Health = 50f;
     bool isInvincible = false;
     public float maxIvincibilityTime = 0.2f;
     float invincibleTimer;
+    Transform indicator;
 
     // Start is called before the first frame update
     void Start()
@@ -28,19 +30,31 @@ public class Enemy : MonoBehaviour
         Rigid = this.GetComponent<Rigidbody>();
         MaxSpeed = MaxSpeed + Random.Range(-2f, 2f);
         Acceleration = Acceleration + Random.Range(-2f, 2f);
+        maxHealth = Health;
+        indicator = transform.Find("Indicator");
     }
 
     // Update is called once per frame
     void Update()
     {
-        
         if (Health <= 0)
         {
             Destroy(this.gameObject);
             Player.gameObject.GetComponent<Spawner>().Died();
             Killed = true;
         }
-            
+        if (Health > maxHealth / 2)
+        {
+            float r = 1 - (Health / maxHealth);
+            indicator.GetComponent<Renderer>().material.color = new Color(r, 1f, 0f, 1f);
+        }
+        else
+        {
+            float g = (Health / maxHealth);
+            indicator.GetComponent<Renderer>().material.color = new Color(1f, g, 0f, 1f);
+        }
+
+
 
         //print(Health);
         //Enemy Looking and Moving in the Player's Direction

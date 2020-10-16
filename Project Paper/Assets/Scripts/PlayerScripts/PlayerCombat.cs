@@ -22,7 +22,7 @@ public class PlayerCombat : MonoBehaviour
     GameObject player;
 
     [SerializeField]
-    float MaxComboDelay = 1f;
+    float MaxComboDelay = 0.8f;
     float comboDelayTimer;
     bool attackFinished = true;
     bool attacking = false;

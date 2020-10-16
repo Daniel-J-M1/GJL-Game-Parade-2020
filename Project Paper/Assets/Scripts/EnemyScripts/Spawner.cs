@@ -8,7 +8,7 @@ public class Spawner : MonoBehaviour
 
     public float waveEnemyCount = 3;
     public float waveFrequency = 5;
-    public float difficulty = 1.3f;
+    public float difficulty = 1.1f;
     int currentlyAlive = 0;
     float waveTimer = 2;
     int currentWave = 1;

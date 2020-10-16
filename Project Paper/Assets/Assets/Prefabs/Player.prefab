@@ -447,7 +447,7 @@ MonoBehaviour:
   swingRadious: 120
   attackState: 0
   player: {fileID: 2844468617326260855}
-  MaxComboDelay: 0.5
+  MaxComboDelay: 0.8
 --- !u!1 &2844468618572113757
 GameObject:
   m_ObjectHideFlags: 0

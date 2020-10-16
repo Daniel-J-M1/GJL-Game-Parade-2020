@@ -4,29 +4,44 @@ using UnityEngine;
 
 public class WallVisibility : MonoBehaviour
 {
-    public GameObject Wall1;
-    public GameObject Wall2;
+    //public GameObject Wall1;
+    //public GameObject Wall2;
+    //
+    GameObject player;
+    //public CapsuleCollider Object;
 
-    //GameObject Player;
-    public CapsuleCollider Object;
-
-
-    void OnTriggerEnter(Collider other)
+    private void Start()
     {
-       if (other == Object)
-       {
-            //Wall1.GetComponent<MeshRenderer>().enabled = false;
-            Wall1.GetComponent<MeshRenderer>().material.color = new Color (1f, 1.0f, 1.0f, 0.5f);
-            Wall2.GetComponent<MeshRenderer>().material.color = new Color(1f, 1.0f, 1.0f, 0.5f);
-       }
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    private void OnTriggerExit(Collider other)
+    void Update()
     {
-        if (other == Object)
+        Collider[] colliders = Physics.OverlapSphere(player.transform.position, 10);
+        foreach(var collider in colliders)
         {
-            Wall1.GetComponent<MeshRenderer>().material.color = new Color(1f, 1.0f, 1.0f, 1f);
-            Wall2.GetComponent<MeshRenderer>().material.color = new Color(1f, 1.0f, 1.0f, 1f);
+            if (collider.tag == "Wall")
+                collider.GetComponent<Renderer>().enabled = false;
+                //collider.GetComponent<MeshRenderer>().material.color = new Color(1, 1, 1, 0.2f);
         }
     }
+
+    //void OnTriggerEnter(Collider other)
+    //{
+    //   if (other == Object)
+    //   {
+    //        //Wall1.GetComponent<MeshRenderer>().enabled = false;
+    //        Wall1.GetComponent<MeshRenderer>().material.color = new Color (1f, 1.0f, 1.0f, 0.5f);
+    //        Wall2.GetComponent<MeshRenderer>().material.color = new Color(1f, 1.0f, 1.0f, 0.5f);
+    //   }
+    //}
+    //
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other == Object)
+    //    {
+    //        Wall1.GetComponent<MeshRenderer>().material.color = new Color(1f, 1.0f, 1.0f, 1f);
+    //        Wall2.GetComponent<MeshRenderer>().material.color = new Color(1f, 1.0f, 1.0f, 1f);
+    //    }
+    //}
 }

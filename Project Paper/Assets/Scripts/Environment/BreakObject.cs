@@ -18,11 +18,11 @@ public class BreakObject : MonoBehaviour
     void BreakAsset()
     {
         GameObject Frac = Instantiate(Fractured, transform.position, transform.rotation);
-        foreach(Rigidbody RB in Frac.GetComponentsInChildren<Rigidbody>())
-        {
-            Vector3 Force = (RB.transform.position = transform.position).normalized * Shatter;
-            RB.AddForce(Force);
-        }
+        //foreach(Rigidbody RB in Frac.GetComponentsInChildren<Rigidbody>())
+        //{
+        //    Vector3 Force = (RB.transform.position = transform.position).normalized * Shatter;
+        //    RB.AddForce(Force, ForceMode.Impulse);
+        //}
         Destroy(gameObject);
     }
 
