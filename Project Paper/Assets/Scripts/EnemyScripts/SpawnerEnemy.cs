@@ -155,13 +155,24 @@ public class SpawnerEnemy : MonoBehaviour
         return randomPoints[currentPoint];
     }
 
-    public void AlterHealth(float altHP)
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Projectile")
+        {
+            AlterHealth(-5, false);
+        }
+    }
+
+    public void AlterHealth(float altHP, bool inv)
     {
         if (!isInvincible)
         {
             health += altHP;
-            isInvincible = true;
-            invincibleTimer = maxIvincibilityTime;
+            if (inv)
+            {
+                isInvincible = true;
+                invincibleTimer = maxIvincibilityTime;
+            }
         }
     }
 

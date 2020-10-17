@@ -51,6 +51,7 @@ public class Spawner : MonoBehaviour
                 switch (currentWave)
                 {
                     case 1:
+                        Instantiate(bossEnemy, GetRandomBossPosition(), Quaternion.identity);
                         StartCoroutine(SpawnWave((float)waveEnemyCount, 0));
                         break;
                     case 2:
@@ -110,6 +111,5 @@ public class Spawner : MonoBehaviour
     public void Died()
     {
         killCount++;
-        print(killCount);
     }
 }

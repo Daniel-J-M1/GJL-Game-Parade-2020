@@ -14,13 +14,13 @@ public class WeaponCollider : MonoBehaviour
             PlayerCombat playerCombat = GameObject.FindGameObjectWithTag("Weapon").GetComponent<PlayerCombat>();
 
             if (playerCombat.attackState == PlayerCombat.AttackState.AS_ATTACK1)
-                other.gameObject.GetComponent<SpawnerEnemy>().AlterHealth(-baseDamage);
+                other.gameObject.GetComponent<SpawnerEnemy>().AlterHealth(-baseDamage, false);
 
             if (playerCombat.attackState == PlayerCombat.AttackState.AS_ATTACK2)
-                other.gameObject.GetComponent<SpawnerEnemy>().AlterHealth(-baseDamage * 1.5f);
+                other.gameObject.GetComponent<SpawnerEnemy>().AlterHealth(-baseDamage * 1.5f, false);
 
             if (playerCombat.attackState == PlayerCombat.AttackState.AS_ATTACK3)
-                other.gameObject.GetComponent<SpawnerEnemy>().AlterHealth(-baseDamage * 3);
+                other.gameObject.GetComponent<SpawnerEnemy>().AlterHealth(-baseDamage * 3, false);
         }
 
         if (other.gameObject.tag == "Boss Enemy")
@@ -28,13 +28,13 @@ public class WeaponCollider : MonoBehaviour
             PlayerCombat playerCombat = GameObject.FindGameObjectWithTag("Weapon").GetComponent<PlayerCombat>();
             
             if (playerCombat.attackState == PlayerCombat.AttackState.AS_ATTACK1)
-                other.gameObject.GetComponent<BossEnemy>().AlterHealth(-baseDamage);
+                other.gameObject.GetComponent<BossEnemy>().AlterHealth(-baseDamage, false);
             
             if (playerCombat.attackState == PlayerCombat.AttackState.AS_ATTACK2)
-                other.gameObject.GetComponent<BossEnemy>().AlterHealth(-baseDamage * 1.5f);
+                other.gameObject.GetComponent<BossEnemy>().AlterHealth(-baseDamage * 1.5f, false);
             
             if (playerCombat.attackState == PlayerCombat.AttackState.AS_ATTACK3)
-                other.gameObject.GetComponent<BossEnemy>().AlterHealth(-baseDamage * 3);
+                other.gameObject.GetComponent<BossEnemy>().AlterHealth(-baseDamage * 3, false);
         }
 
         if (other.gameObject.tag == "Enemy")

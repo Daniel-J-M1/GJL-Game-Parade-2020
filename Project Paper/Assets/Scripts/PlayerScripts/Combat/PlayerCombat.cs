@@ -156,7 +156,6 @@ public class PlayerCombat : MonoBehaviour
         }
         if (sprayAmmo <= 0 || !Input.GetMouseButton(1))
         {
-            print("Rot back swing");
             transform.rotation = Quaternion.Euler(baseRotation);
             spraying = false;
             yield return null;
