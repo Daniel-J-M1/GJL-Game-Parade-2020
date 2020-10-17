@@ -21,6 +21,11 @@ public class PlayerController : MonoBehaviour
     float maxInvTimer = 0.3f;
 
     public Slider healthBar;
+    public Image dashImg1;
+    public Image dashImg2;
+    public Text cashText;
+
+    private float cash;
 
     // Start is called before the first frame update
     void Start()
@@ -34,17 +39,35 @@ public class PlayerController : MonoBehaviour
         health = maxHealth;
         healthBar.maxValue = maxHealth;
         healthBar.value = maxHealth;
+        cash = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        Color colorActive = new Color(1f, 1f, 1f, 1f);
+        Color colorNotActive = new Color(1f, 1f, 1f, 0f);
+        if (dashChargeCount == 2)
+        {
+            dashImg1.color = colorActive;
+            dashImg2.color = colorActive;
+        }
+        else if (dashChargeCount == 1)
+        {
+            dashImg1.color = colorActive;
+            dashImg2.color = colorNotActive;
+        }
+        else
+        {
+            dashImg1.color = colorNotActive;
+            dashImg2.color = colorNotActive;
+        }
+
+        cashText.text = cash.ToString();
     }
 
     private void LateUpdate()
     {
-        
         float multiplier = speed * 100;
 
 
@@ -120,5 +143,15 @@ public class PlayerController : MonoBehaviour
             invTimer = maxInvTimer;
             invincible = true;
         }
+    }
+
+    public float GetCash()
+    {
+        return cash;
+    }
+
+    public void AlterCash(int amount)
+    {
+        cash += amount;
     }
 }

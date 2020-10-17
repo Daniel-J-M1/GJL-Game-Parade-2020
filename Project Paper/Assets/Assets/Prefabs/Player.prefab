@@ -43,6 +43,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.015129478, y: 0.14445025, z: 0.017636433}
   m_Center: {x: -2.0487558e-19, y: 0.007286225, z: -5.3378105e-19}
+--- !u!64 &2061265778
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148801937600}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5076798556035486163, guid: a745529e7564ffa498ef1fb18c17111a, type: 3}
 --- !u!114 &1292751328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,11 +82,12 @@ GameObject:
   - component: {fileID: 2844468617326260859}
   - component: {fileID: 2844468617326260852}
   - component: {fileID: 2844468617326260853}
-  - component: {fileID: 2844468617326260854}
   - component: {fileID: 2844468617326260858}
+  - component: {fileID: 445795838}
+  - component: {fileID: 445795841}
   m_Layer: 0
   m_Name: Cylinder
-  m_TagString: Untagged
+  m_TagString: PlayerBody
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -84,7 +99,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2844468617326260855}
-  m_LocalRotation: {x: -0.0000000016490027, y: -0.6512955, z: -0.0000000010881185, w: 0.7588242}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -142,20 +157,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &2844468617326260854
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2844468617326260855}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!114 &2844468617326260858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,6 +170,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turnSpeed: 15
+--- !u!64 &445795838
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2844468617326260855}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &445795841
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2844468617326260855}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0000001, y: 2, z: 1.0000002}
+  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &2844468617627982917
 GameObject:
   m_ObjectHideFlags: 0
@@ -182,6 +210,7 @@ GameObject:
   - component: {fileID: 7036671578786709563}
   - component: {fileID: 1604393780}
   - component: {fileID: 181619268}
+  - component: {fileID: 1122524508}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -221,6 +250,9 @@ MonoBehaviour:
   health: 100
   speed: 10
   healthBar: {fileID: 0}
+  dashImg1: {fileID: 0}
+  dashImg2: {fileID: 0}
+  cashText: {fileID: 0}
 --- !u!54 &7036671578786709563
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -268,6 +300,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fd65534f9c415d40a704a4f7ad43949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1122524508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2844468617627982917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 767045d71cafa6e48879c2c146951deb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MusicBase: {fileID: 0}
+  BossMusic: {fileID: 0}
 --- !u!1 &2844468617864849271
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,6 +360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ammoSlider: {fileID: 0}
+  ammoText: {fileID: 0}
   projectile: {fileID: 3963074279223466036, guid: b625c072261959f46b457d295f0960b5, type: 3}
   swingSpeed: 0.2
   swingRadious: 120

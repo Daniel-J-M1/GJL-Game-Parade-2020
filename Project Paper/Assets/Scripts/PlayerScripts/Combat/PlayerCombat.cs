@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PlayerCombat : MonoBehaviour
 {
     public Slider ammoSlider;
+    public Text ammoText;
 
     [SerializeField]
     public GameObject projectile;
@@ -54,6 +55,7 @@ public class PlayerCombat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        ammoText.text = sprayAmmo.ToString();
         ammoSlider.value = sprayAmmo;
         penTip = GameObject.FindGameObjectWithTag("PenTip");
         float swingMultiplier = 100;

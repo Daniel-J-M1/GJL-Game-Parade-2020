@@ -21,7 +21,7 @@ public class SpawnerEnemy : MonoBehaviour
     public float moveSpeed = 10f;
 
     float maxHealth;
-    public float health = 300f;
+    public float health = 150f;
 
     bool isInvincible = false;
     public float maxIvincibilityTime = 0.2f;
@@ -45,6 +45,7 @@ public class SpawnerEnemy : MonoBehaviour
         {
             Destroy(this.gameObject);
             player.gameObject.GetComponent<Spawner>().Died();
+            player.GetComponent<PlayerController>().AlterCash(5);
         }
         if (health > maxHealth / 2)
         {
