@@ -49,6 +49,8 @@ public class PlayerController : MonoBehaviour
 
         if (!dashing)
             body.velocity = movement * Time.deltaTime;
+
+        transform.position = new Vector3(transform.position.x, 1.2f, transform.position.z);
     }
 
     IEnumerator Dash(Vector3 movement)

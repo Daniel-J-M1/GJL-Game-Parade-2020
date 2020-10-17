@@ -169,6 +169,7 @@ public class PlayerCombat : MonoBehaviour
 
     IEnumerator Attack(Vector3 rot, Quaternion start)
     {
+        //play sound here
         Quaternion destination = start * Quaternion.Euler(rot);
         float startTime = Time.time;
         float percentComplete = 0f;

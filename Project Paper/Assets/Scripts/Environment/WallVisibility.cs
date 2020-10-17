@@ -77,29 +77,8 @@ public class WallVisibility : MonoBehaviour
                             collider.gameObject.GetComponent<Renderer>().materials = wallMats;
                         }
                     }
-
-                    //print("wall");
                 }
             }
         }
     }
-
-    //void OnTriggerEnter(Collider other)
-    //{
-    //   if (other == Object)
-    //   {
-    //        //Wall1.GetComponent<MeshRenderer>().enabled = false;
-    //        Wall1.GetComponent<MeshRenderer>().material.color = new Color (1f, 1.0f, 1.0f, 0.5f);
-    //        Wall2.GetComponent<MeshRenderer>().material.color = new Color(1f, 1.0f, 1.0f, 0.5f);
-    //   }
-    //}
-    //
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    if (other == Object)
-    //    {
-    //        Wall1.GetComponent<MeshRenderer>().material.color = new Color(1f, 1.0f, 1.0f, 1f);
-    //        Wall2.GetComponent<MeshRenderer>().material.color = new Color(1f, 1.0f, 1.0f, 1f);
-    //    }
-    //}
 }
