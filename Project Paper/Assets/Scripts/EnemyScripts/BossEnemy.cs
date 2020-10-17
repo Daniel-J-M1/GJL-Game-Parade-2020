@@ -33,6 +33,7 @@ public class BossEnemy : MonoBehaviour
     bool isInvincible = false;
     public float maxIvincibilityTime = 0.2f;
     float invincibleTimer;
+    bool wallHit = false;
 
     Transform indicator;
 
@@ -55,7 +56,7 @@ public class BossEnemy : MonoBehaviour
         currentDelay -= Time.deltaTime;
         if (health <= 0)
         {
-            PlayMusic.BaseMusic();
+            //PlayMusic.BaseMusic();
             Destroy(this.gameObject);
             player.gameObject.GetComponent<Spawner>().Died();
         }
@@ -127,7 +128,13 @@ public class BossEnemy : MonoBehaviour
         while (chargeTimer > 0)
         {
             chargeTimer -= Time.deltaTime;
-            body.MovePosition(transform.position + Direction * chargeSpeed * Time.deltaTime);
+            if (wallHit == true)
+            {
+                chargeTimer = 0;
+                wallHit = false;
+            }
+            else
+                body.MovePosition(transform.position + Direction * chargeSpeed * Time.deltaTime);
             yield return null;
         }
         attacking = false;
@@ -201,6 +208,12 @@ public class BossEnemy : MonoBehaviour
         {
             AlterHealth(-5, false);
         }
+
+        if (other.tag == "Wall")
+        {
+            if (attacking)
+                wallHit = true;
+        }
     }
 
     public void AlterHealth(float altHP, bool inv)
@@ -227,5 +240,10 @@ public class BossEnemy : MonoBehaviour
         dir.y = 0;
         dir.Normalize();
         body.velocity = dir * intensity;
+    }
+
+    public bool GetChargeState()
+    {
+        return attacking;
     }
 }

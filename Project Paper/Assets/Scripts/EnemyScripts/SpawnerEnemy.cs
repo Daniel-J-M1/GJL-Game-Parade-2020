@@ -56,6 +56,10 @@ public class SpawnerEnemy : MonoBehaviour
             float g = (health / maxHealth * 2);
             indicator.GetComponent<Renderer>().material.color = new Color(1f, g, 0f, 1f);
         }
+        if(spawning)
+        {
+            indicator.GetComponent<Renderer>().material.color = new Color(0, 0, 1f);
+        }
 
         if(!moving && !spawning)
         {
@@ -92,7 +96,7 @@ public class SpawnerEnemy : MonoBehaviour
         }
         if (currEnemiesSpawned < maxEnemiesSpawned)
         {
-            print("spawned");
+
             Instantiate(enemy, GetRandomPosition(), Quaternion.identity);
             StartCoroutine(SpawnEnemies());
             currEnemiesSpawned++;

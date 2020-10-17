@@ -62,7 +62,7 @@ public class WallVisibility : MonoBehaviour
                     collider.gameObject.GetComponent<Renderer>().materials = wallMats;
 
                     var children = collider.gameObject.transform.childCount;
-                    print(children);
+
                     for (int i = 0; i < children; i++)
                     {
                         if (collider.gameObject.transform.GetChild(i).GetComponent<Renderer>() == true)
