@@ -55,9 +55,9 @@ public class BossEnemy : MonoBehaviour
         currentDelay -= Time.deltaTime;
         if (health <= 0)
         {
+            PlayMusic.BaseMusic();
             Destroy(this.gameObject);
             player.gameObject.GetComponent<Spawner>().Died();
-            PlayMusic.BaseMusic();
         }
         if (health > maxHealth / 2)
         {

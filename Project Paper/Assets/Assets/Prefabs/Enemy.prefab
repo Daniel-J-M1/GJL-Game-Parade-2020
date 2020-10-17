@@ -109,6 +109,7 @@ GameObject:
   - component: {fileID: 9021585803772053677}
   - component: {fileID: 9021585803772053670}
   - component: {fileID: 9021585803772053665}
+  - component: {fileID: 6119642857332474042}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -226,3 +227,17 @@ MonoBehaviour:
   Killed: 0
   Health: 60
   maxIvincibilityTime: 0.2
+--- !u!64 &6119642857332474042
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9021585803772053676}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
