@@ -10,6 +10,7 @@ public class BossEnemy : MonoBehaviour
     GameObject player;
     int currentPoint;
     private Rigidbody body;
+    private AudioController PlayMusic;
 
     bool moving = false;
     int maxMoveCount = 1;
@@ -56,6 +57,7 @@ public class BossEnemy : MonoBehaviour
         {
             Destroy(this.gameObject);
             player.gameObject.GetComponent<Spawner>().Died();
+            PlayMusic.BaseMusic();
         }
         if (health > maxHealth / 2)
         {
