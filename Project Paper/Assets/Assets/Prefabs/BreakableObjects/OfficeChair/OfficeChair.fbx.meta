@@ -1,9 +1,19 @@
 fileFormatVersion: 2
-guid: 5c7867205ea8cb044bab44ad55d89656
+guid: b5edcd5f96f363b4db9d95e76c0cf7c1
 ModelImporter:
   serializedVersion: 20101
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Chair Cushion
+    second: {fileID: 2100000, guid: 1671b9273aa783841b6b8ce4d375c5ff, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Main  Body
+    second: {fileID: 2100000, guid: caff47538a9fc1c45b4387023b2a3ff2, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
