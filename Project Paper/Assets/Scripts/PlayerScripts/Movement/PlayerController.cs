@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
 
     private void LateUpdate()
     {
+        
         float multiplier = speed * 100;
 
 
@@ -70,12 +71,6 @@ public class PlayerController : MonoBehaviour
             dashChargeCount++;
             dashChargeCooldown = 2;
         }
-
-        if (Input.GetKeyDown("e"))
-        {
-            AlterHealth(-10, false);
-        }
-
 
         if (Input.GetKeyDown("left shift") && dashChargeCount > 0)
         {
@@ -124,29 +119,6 @@ public class PlayerController : MonoBehaviour
             healthBar.value = health;
             invTimer = maxInvTimer;
             invincible = true;
-        }
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.tag == "Enemy")
-        {
-            AlterHealth(-5, true);
-        }
-
-        if (other.tag == "Boss Enemy")
-        {
-            GameObject boss = other.gameObject;
-            if (boss.GetComponent<BossEnemy>().GetChargeState())
-            {
-                AlterHealth(-25, true);
-                print("charge hit");
-            }
-            else
-            {
-                AlterHealth(-10, true);
-                print("boss hit");
-            }
         }
     }
 }

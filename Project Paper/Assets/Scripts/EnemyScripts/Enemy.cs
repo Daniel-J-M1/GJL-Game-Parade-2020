@@ -81,6 +81,13 @@ public class Enemy : MonoBehaviour
         {
             AlterHealth(-5, false);
         }
+
+        if (other.tag == "PlayerBody")
+        {
+            PlayerController playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+            playerController.AlterHealth(-5, true);
+        }
+
     }
 
     private void FixedUpdate()

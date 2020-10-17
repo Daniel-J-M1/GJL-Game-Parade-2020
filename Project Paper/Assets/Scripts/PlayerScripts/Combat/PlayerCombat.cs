@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerCombat : MonoBehaviour
 {
+    public Slider ammoSlider;
 
     [SerializeField]
     public GameObject projectile;
@@ -44,11 +46,15 @@ public class PlayerCombat : MonoBehaviour
         attackState = AttackState.AS_IDLE;
         baseRotation = new Vector3(0, 0, 0);
         sprayAmmo = maxSprayAmmo;
+
+        ammoSlider.maxValue = maxSprayAmmo;
+        ammoSlider.value = sprayAmmo;
     }
 
     // Update is called once per frame
     void Update()
     {
+        ammoSlider.value = sprayAmmo;
         penTip = GameObject.FindGameObjectWithTag("PenTip");
         float swingMultiplier = 100;
         swingMultiplier *= swingSpeed;

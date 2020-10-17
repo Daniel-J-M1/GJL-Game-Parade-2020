@@ -214,6 +214,21 @@ public class BossEnemy : MonoBehaviour
             if (attacking)
                 wallHit = true;
         }
+
+        if (other.tag == "PlayerBody")
+        {
+            PlayerController playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+            if (GetChargeState())
+            {
+                playerController.AlterHealth(-25, true);
+                print("charge hit");
+            }
+            else
+            {
+                playerController.AlterHealth(-10, true);
+                print("boss hit");
+            }
+        }
     }
 
     public void AlterHealth(float altHP, bool inv)
