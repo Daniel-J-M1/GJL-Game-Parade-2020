@@ -191,5 +191,7 @@ public class PlayerCombat : MonoBehaviour
     public void SetAmmo(float amount)
     {
         sprayAmmo += amount;
+        if (sprayAmmo > 100)
+            sprayAmmo = 100;
     }
 }

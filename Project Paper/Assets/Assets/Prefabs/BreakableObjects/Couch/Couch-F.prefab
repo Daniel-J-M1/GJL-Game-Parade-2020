@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4780838812739576291}
   - component: {fileID: 1488706240055185175}
   - component: {fileID: 1199138724665735327}
+  - component: {fileID: 6596526018878735808}
   m_Layer: 0
   m_Name: Couch_cell.004
   m_TagString: Untagged
@@ -113,6 +114,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6596526018878735808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 778217704353706937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 846cfc41fdd0af549a1ed95f40959dc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1955231209213746905
 GameObject:
   m_ObjectHideFlags: 0
@@ -126,6 +139,7 @@ GameObject:
   - component: {fileID: 6024065555998763016}
   - component: {fileID: 1345927424935089249}
   - component: {fileID: 3859447047138612405}
+  - component: {fileID: 7732178102907366661}
   m_Layer: 0
   m_Name: Couch_cell.001
   m_TagString: Untagged
@@ -226,6 +240,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7732178102907366661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1955231209213746905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 846cfc41fdd0af549a1ed95f40959dc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2394280299176574652
 GameObject:
   m_ObjectHideFlags: 0
@@ -277,6 +303,7 @@ GameObject:
   - component: {fileID: 6519281705074156892}
   - component: {fileID: 8035229704419633870}
   - component: {fileID: 8057591788019369641}
+  - component: {fileID: 1210654941761144432}
   m_Layer: 0
   m_Name: Couch_cell.007
   m_TagString: Untagged
@@ -377,6 +404,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1210654941761144432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3447551389187475846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 846cfc41fdd0af549a1ed95f40959dc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3759322472316291035
 GameObject:
   m_ObjectHideFlags: 0
@@ -390,6 +429,7 @@ GameObject:
   - component: {fileID: 2849610164919047944}
   - component: {fileID: 4017392936137609680}
   - component: {fileID: 6385274849942716009}
+  - component: {fileID: 6409914612858808767}
   m_Layer: 0
   m_Name: Couch_cell.003
   m_TagString: Untagged
@@ -490,6 +530,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6409914612858808767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3759322472316291035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 846cfc41fdd0af549a1ed95f40959dc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3901082252737585826
 GameObject:
   m_ObjectHideFlags: 0
@@ -500,7 +552,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4424994507099043864}
   m_Layer: 0
-  m_Name: Couch-f
+  m_Name: Couch-F
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -534,6 +586,7 @@ GameObject:
   - component: {fileID: 2148225864618051742}
   - component: {fileID: 2662751517150201746}
   - component: {fileID: 4454935084153437575}
+  - component: {fileID: 8232916542351374324}
   m_Layer: 0
   m_Name: Couch_cell.006
   m_TagString: Untagged
@@ -634,6 +687,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8232916542351374324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5244447099843105944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 846cfc41fdd0af549a1ed95f40959dc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5473547686631293376
 GameObject:
   m_ObjectHideFlags: 0
@@ -647,6 +712,7 @@ GameObject:
   - component: {fileID: 6872546532699940322}
   - component: {fileID: 1153060626575775141}
   - component: {fileID: 374461827652763005}
+  - component: {fileID: 2760792756359405062}
   m_Layer: 0
   m_Name: Couch_cell.005
   m_TagString: Untagged
@@ -747,6 +813,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2760792756359405062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5473547686631293376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 846cfc41fdd0af549a1ed95f40959dc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6772536965216841982
 GameObject:
   m_ObjectHideFlags: 0
@@ -760,6 +838,7 @@ GameObject:
   - component: {fileID: 4779163049542211097}
   - component: {fileID: 6327970484144066021}
   - component: {fileID: 1003388683037691146}
+  - component: {fileID: 1583937751795400241}
   m_Layer: 0
   m_Name: Couch_cell.002
   m_TagString: Untagged
@@ -860,6 +939,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1583937751795400241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6772536965216841982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 846cfc41fdd0af549a1ed95f40959dc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9038139249107041677
 GameObject:
   m_ObjectHideFlags: 0
@@ -873,6 +964,7 @@ GameObject:
   - component: {fileID: 5236589800461818185}
   - component: {fileID: 6121127198834056026}
   - component: {fileID: 4552367825057413975}
+  - component: {fileID: 3730597907096104558}
   m_Layer: 0
   m_Name: Couch_cell
   m_TagString: Untagged
@@ -973,3 +1065,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3730597907096104558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9038139249107041677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 846cfc41fdd0af549a1ed95f40959dc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: 6716533765754259239}
   - component: {fileID: 7597618285747946955}
   - component: {fileID: 5160469482090665548}
+  - component: {fileID: 3566353807137323135}
   m_Layer: 0
   m_Name: Monitor_cell.002
   m_TagString: Untagged
@@ -149,6 +150,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3566353807137323135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1846309745601122270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 846cfc41fdd0af549a1ed95f40959dc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3990111709944379811
 GameObject:
   m_ObjectHideFlags: 0
@@ -162,6 +175,7 @@ GameObject:
   - component: {fileID: 8131948705650563061}
   - component: {fileID: 5636894694709791576}
   - component: {fileID: 6443886018949573782}
+  - component: {fileID: 4601534950606373839}
   m_Layer: 0
   m_Name: Monitor_cell
   m_TagString: Untagged
@@ -262,6 +276,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &4601534950606373839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3990111709944379811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 846cfc41fdd0af549a1ed95f40959dc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6866737487091224895
 GameObject:
   m_ObjectHideFlags: 0
@@ -275,6 +301,7 @@ GameObject:
   - component: {fileID: 3328425999894621007}
   - component: {fileID: 4572493434800360060}
   - component: {fileID: 3315755266459338116}
+  - component: {fileID: 256461588275198394}
   m_Layer: 0
   m_Name: Monitor_cell.004
   m_TagString: Untagged
@@ -376,6 +403,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &256461588275198394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6866737487091224895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 846cfc41fdd0af549a1ed95f40959dc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7681269068399546085
 GameObject:
   m_ObjectHideFlags: 0
@@ -420,6 +459,7 @@ GameObject:
   - component: {fileID: 2130691959797565247}
   - component: {fileID: 4852967232779803751}
   - component: {fileID: 6925118647502602171}
+  - component: {fileID: 4787066540417099988}
   m_Layer: 0
   m_Name: Monitor_cell.001
   m_TagString: Untagged
@@ -521,6 +561,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &4787066540417099988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8111238304343916994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 846cfc41fdd0af549a1ed95f40959dc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8797387314523218226
 GameObject:
   m_ObjectHideFlags: 0
@@ -534,6 +586,7 @@ GameObject:
   - component: {fileID: 8630253243307821689}
   - component: {fileID: 3631340417190176332}
   - component: {fileID: 8663486320432310996}
+  - component: {fileID: 6017069457773330662}
   m_Layer: 0
   m_Name: Monitor_cell.003
   m_TagString: Untagged
@@ -635,6 +688,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6017069457773330662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8797387314523218226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 846cfc41fdd0af549a1ed95f40959dc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8829680685912371658
 GameObject:
   m_ObjectHideFlags: 0
@@ -648,6 +713,7 @@ GameObject:
   - component: {fileID: 7961428154668314213}
   - component: {fileID: 7437973912875297426}
   - component: {fileID: 1630167817978670862}
+  - component: {fileID: 9195988398181998620}
   m_Layer: 0
   m_Name: Monitor_cell.005
   m_TagString: Untagged
@@ -748,3 +814,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &9195988398181998620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8829680685912371658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 846cfc41fdd0af549a1ed95f40959dc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

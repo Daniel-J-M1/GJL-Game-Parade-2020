@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,7 +18,7 @@ public class PlayerController : MonoBehaviour
 
     bool invincible = false;
     float invTimer = 0;
-    float maxInvTimer = 0.2f;
+    float maxInvTimer = 0.3f;
 
     public Slider healthBar;
 
@@ -122,6 +123,7 @@ public class PlayerController : MonoBehaviour
             health += amount;
             healthBar.value = health;
             invTimer = maxInvTimer;
+            invincible = true;
         }
     }
 
@@ -129,7 +131,22 @@ public class PlayerController : MonoBehaviour
     {
         if (other.tag == "Enemy")
         {
-                AlterHealth(5, true);
+            AlterHealth(-5, true);
+        }
+
+        if (other.tag == "Boss Enemy")
+        {
+            GameObject boss = other.gameObject;
+            if (boss.GetComponent<BossEnemy>().GetChargeState())
+            {
+                AlterHealth(-25, true);
+                print("charge hit");
+            }
+            else
+            {
+                AlterHealth(-10, true);
+                print("boss hit");
+            }
         }
     }
 }

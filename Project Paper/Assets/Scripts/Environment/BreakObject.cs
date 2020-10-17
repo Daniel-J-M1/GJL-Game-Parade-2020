@@ -15,6 +15,14 @@ public class BreakObject : MonoBehaviour
             BreakAsset();
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.name == "BiCPen")
+            BreakAsset();
+        if (other.tag == "Boss Enemy")
+            BreakAsset();
+    }
+
     void BreakAsset()
     {
         GameObject Frac = Instantiate(Fractured, transform.position, transform.rotation);
