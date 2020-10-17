@@ -79,9 +79,7 @@ public class Enemy : MonoBehaviour
     {
         if (other.tag == "Projectile")
         {
-            print("collided");
-            AlterHealth(-3, false);
-            
+            AlterHealth(-5, false);
         }
     }
 

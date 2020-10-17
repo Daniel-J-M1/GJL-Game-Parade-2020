@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float health = 100;
-    public float speed = 30;
+    public float speed = 10;
     Vector3 playerRotation;
     Rigidbody body;
     // Start is called before the first frame update
@@ -30,8 +30,8 @@ public class PlayerController : MonoBehaviour
 
         Vector3 direction = input.normalized;
 
-        Vector3 movement = direction * multiplier * Time.deltaTime;
+        Vector3 movement = direction * multiplier;
 
-        body.velocity = new Vector3(movement.x, body.velocity.y, movement.z);
+        body.velocity = new Vector3(movement.x, body.velocity.y, movement.z) * Time.deltaTime;
     }
 }
