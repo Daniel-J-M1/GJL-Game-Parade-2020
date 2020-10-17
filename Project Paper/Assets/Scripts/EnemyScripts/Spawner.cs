@@ -8,6 +8,7 @@ public class Spawner : MonoBehaviour
     public GameObject spawnerEnemy;
     public GameObject bossEnemy;
     public bool paused;
+    private AudioController PlayMusic;
 
     public float waveEnemyCount = 3;
     public float waveFrequency = 5;
@@ -74,6 +75,7 @@ public class Spawner : MonoBehaviour
                     case 8:
                         Instantiate(bossEnemy, GetRandomBossPosition(), Quaternion.identity);
                         currentWave++;
+                        PlayMusic.PlayBoss();
                         break;
                     default:
                         break;
