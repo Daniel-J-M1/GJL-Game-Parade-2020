@@ -18,12 +18,10 @@ public class Spawner : MonoBehaviour
     int killCount = 0;
 
     GameObject[] spawnPoints;
-    GameObject[] bossSpawnPoints;
 
     void Start()
     {
         spawnPoints = GameObject.FindGameObjectsWithTag("Spawn Point");
-        bossSpawnPoints = GameObject.FindGameObjectsWithTag("Boss Walk Point");
         waveEnemyCount = 3;
     }
 
@@ -34,7 +32,7 @@ public class Spawner : MonoBehaviour
     }
     private Vector3 GetRandomBossPosition()
     {
-        Vector3 randPos = bossSpawnPoints[Random.Range(0, bossSpawnPoints.Length)].transform.position;
+        Vector3 randPos = spawnPoints[Random.Range(0, spawnPoints.Length)].transform.position;
         randPos.y = 1.5f;
         return randPos;
     }
@@ -51,7 +49,6 @@ public class Spawner : MonoBehaviour
                 switch (currentWave)
                 {
                     case 1:
-                        Instantiate(bossEnemy, GetRandomBossPosition(), Quaternion.identity);
                         StartCoroutine(SpawnWave((float)waveEnemyCount, 0));
                         break;
                     case 2:

@@ -26,7 +26,7 @@ public class Projectile : MonoBehaviour
         direction.Normalize();
 
         float angle = AngleBetweenTwoPoints(transform.position, mousePos);
-        transform.rotation = Quaternion.Euler(new Vector3(0, -angle - 90, 0));
+        transform.rotation = Quaternion.Euler(new Vector3(0, -angle + 180, 0));
     }
 
     // Update is called once per frame

@@ -142,7 +142,7 @@ public class SpawnerEnemy : MonoBehaviour
 
     GameObject GetRandomPoint()
     {
-        GameObject[] randomPoints = GameObject.FindGameObjectsWithTag("Walk Point");
+        GameObject[] randomPoints = GameObject.FindGameObjectsWithTag("Spawn Point");
         int randPointNew = -1;
         randPointNew = Random.Range(0, randomPoints.Length);
 

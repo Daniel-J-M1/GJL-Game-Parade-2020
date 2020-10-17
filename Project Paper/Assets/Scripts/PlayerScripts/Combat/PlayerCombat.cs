@@ -125,6 +125,7 @@ public class PlayerCombat : MonoBehaviour
             {
                 transform.rotation = Quaternion.Euler(baseRotation);
                 spraying = false;
+                attackState = AttackState.AS_IDLE;
             }
             yield return null;
         }
@@ -132,19 +133,20 @@ public class PlayerCombat : MonoBehaviour
         {
             transform.rotation = Quaternion.Euler(baseRotation);
             spraying = false;
+            attackState = AttackState.AS_IDLE;
         }
         yield return null;
     }
 
     IEnumerator SprayArm(Vector3 rot, Quaternion start)
     {
-
+        attackState = AttackState.AS_SECONDARY;
         Quaternion destination = start * Quaternion.Euler(rot);
         float startTime = Time.time;
         float percentComplete = 0f;
         while (percentComplete <= 1.0f)
         {
-            percentComplete = (Time.time - startTime) / swingSpeed;
+            percentComplete = (Time.time - startTime) / (swingSpeed / 2);
             transform.rotation = Quaternion.Slerp(start, destination, percentComplete);
             yield return null;
         }
@@ -158,6 +160,8 @@ public class PlayerCombat : MonoBehaviour
         {
             transform.rotation = Quaternion.Euler(baseRotation);
             spraying = false;
+            attackState = AttackState.AS_IDLE;
+
             yield return null;
         }
         yield return null;

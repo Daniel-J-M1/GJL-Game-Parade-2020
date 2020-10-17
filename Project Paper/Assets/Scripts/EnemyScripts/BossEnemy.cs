@@ -86,7 +86,7 @@ public class BossEnemy : MonoBehaviour
 
     GameObject GetRandomPoint()
     {
-        GameObject[] randomPoints = GameObject.FindGameObjectsWithTag("Boss Walk Point");
+        GameObject[] randomPoints = GameObject.FindGameObjectsWithTag("Spawn Point");
         int randPointNew = -1;
         randPointNew = Random.Range(0, randomPoints.Length);
 
@@ -144,7 +144,6 @@ public class BossEnemy : MonoBehaviour
         }
         if (currEnemiesSpawned < maxEnemiesSpawned)
         {
-            print("spawned");
             Instantiate(enemy, GetPointInRadious(), Quaternion.identity);
             StartCoroutine(SpawnEnemies());
             currEnemiesSpawned++;
