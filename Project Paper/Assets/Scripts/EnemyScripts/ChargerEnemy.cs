@@ -22,6 +22,7 @@ public class ChargerEnemy : MonoBehaviour
     public float maxIvincibilityTime = 0.2f;
     float invincibleTimer;
     bool wallHit = false;
+    int currentPoint;
 
     Transform indicator;
 
@@ -33,6 +34,7 @@ public class ChargerEnemy : MonoBehaviour
         maxSpeed = maxSpeed + Random.Range(-2f, 2f);
         health = maxHealth;
         indicator = transform.Find("Indicator");
+        currentPoint = 0;
     }
 
     // Update is called once per frame
@@ -56,7 +58,25 @@ public class ChargerEnemy : MonoBehaviour
             indicator.GetComponent<Renderer>().material.color = new Color(1f, g, 0f, 1f);
         }
 
+        if (!charging && !shooting && !moving)
+        {
 
+        }
 
+    }
+
+    GameObject GetRandomPoint()
+    {
+        GameObject[] randomPoints = GameObject.FindGameObjectsWithTag("Spawn Point");
+        int randPointNew = -1;
+        randPointNew = Random.Range(0, randomPoints.Length);
+
+        while (randPointNew == currentPoint)
+        {
+            randPointNew = Random.Range(0, randomPoints.Length);
+        }
+        currentPoint = randPointNew;
+
+        return randomPoints[currentPoint];
     }
 }

@@ -2295,7 +2295,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 325601858}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.1, y: 0, z: -0.81}
+  m_LocalPosition: {x: 6.82, y: 0, z: -0.67}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2121823878}
@@ -4780,7 +4780,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 755050858}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.35, y: 0, z: 5.65}
+  m_LocalPosition: {x: 4.7, y: 0, z: 2.07}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2121823878}
@@ -5405,7 +5405,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Walls_DoubleDoor
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1003660954, guid: 5281310f0df1e014cb4317904f5be879, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5281310f0df1e014cb4317904f5be879, type: 3}
 --- !u!4 &799639963 stripped
 Transform:
@@ -5648,7 +5649,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Walls_DoubleDoor (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1003660954, guid: 5281310f0df1e014cb4317904f5be879, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5281310f0df1e014cb4317904f5be879, type: 3}
 --- !u!4 &849478479 stripped
 Transform:
@@ -8989,7 +8991,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1349986384}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.01, y: 0, z: 3.72}
+  m_LocalPosition: {x: 2.15, y: 0, z: -2.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2121823878}
