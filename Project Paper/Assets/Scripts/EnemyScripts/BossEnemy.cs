@@ -210,7 +210,7 @@ public class BossEnemy : MonoBehaviour
             AlterHealth(-5, false);
         }
 
-        if (other.tag == "Wall")
+        if (other.tag == "Wall" || other.tag == "Door")
         {
             if (attacking)
                 wallHit = true;
