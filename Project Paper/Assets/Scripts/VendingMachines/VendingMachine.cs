@@ -32,9 +32,9 @@ public class VendingMachine : MonoBehaviour
     {
         if (buying)
         {
-            if (other.name == "Player")
+            if (other.tag == "PlayerBody")
             {
-                PlayerController pcont = other.GetComponent<PlayerController>();
+                PlayerController pcont = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
                 PlayerCombat pcomb = GameObject.FindGameObjectWithTag("Weapon").GetComponent<PlayerCombat>();
                 WeaponCollider weapColl = GameObject.FindGameObjectWithTag("Bic").GetComponent<WeaponCollider>();
                 if (pcont.GetCash() >= 10)
@@ -64,6 +64,7 @@ public class VendingMachine : MonoBehaviour
                         weapColl.baseDamage += 0.2f;
                         pcomb.SetSwingSpeed(0.98f);
                     }
+                    buying = false;
                 }
             }
         }
