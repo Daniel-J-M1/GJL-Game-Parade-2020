@@ -210,7 +210,7 @@ MonoBehaviour:
   spawnerDelay: 10
   chargeSpeed: 100
   maxSpeed: 20
-  health: 1000
+  health: 5000
   maxIvincibilityTime: 0.2
 --- !u!54 &966532779138265848
 Rigidbody:

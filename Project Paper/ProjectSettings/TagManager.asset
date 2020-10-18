@@ -12,6 +12,18 @@ TagManager:
   - Boss Enemy
   - Boss Walk Point
   - Spawner Enemy
+  - Wall
+  - PenTip
+  - PlayerBody
+  - Projectile
+  - PlayerIndicator
+  - BlueVendingMachine
+  - OrangeVendingMachine
+  - PurpleVendingMachine
+  - GreenVendingMachine
+  - Bic
+  - Door
+  - BossDoor
   layers:
   - Default
   - TransparentFX

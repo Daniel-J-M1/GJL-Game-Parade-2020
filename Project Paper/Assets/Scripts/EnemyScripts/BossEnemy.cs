@@ -28,7 +28,7 @@ public class BossEnemy : MonoBehaviour
     public float maxSpeed = 10f;
 
     float maxHealth;
-    public float health = 1000f;
+    public float health = 5000f;
 
     bool isInvincible = false;
     public float maxIvincibilityTime = 0.2f;
