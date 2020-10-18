@@ -6358,6 +6358,14 @@ PrefabInstance:
       propertyPath: ammoText
       value: 
       objectReference: {fileID: 1453772850}
+    - target: {fileID: 2844468618983461122, guid: b3bef9079a31def4aa25d3803f524a7a, type: 3}
+      propertyPath: m_Name
+      value: Indicator
+      objectReference: {fileID: 0}
+    - target: {fileID: 2844468618983461122, guid: b3bef9079a31def4aa25d3803f524a7a, type: 3}
+      propertyPath: m_TagString
+      value: PlayerIndicator
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3bef9079a31def4aa25d3803f524a7a, type: 3}
 --- !u!4 &1014261288 stripped

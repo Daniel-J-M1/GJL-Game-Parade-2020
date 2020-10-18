@@ -45,6 +45,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        UpdateHealthIndicator();
+
         Color colorActive = new Color(1f, 1f, 1f, 1f);
         Color colorNotActive = new Color(1f, 1f, 1f, 0f);
         if (dashChargeCount == 2)
@@ -153,5 +155,20 @@ public class PlayerController : MonoBehaviour
     public void AlterCash(int amount)
     {
         cash += amount;
+    }
+
+    void UpdateHealthIndicator()
+    {
+        var indicator = GameObject.FindGameObjectWithTag("PlayerIndicator");
+        if (health > maxHealth / 2)
+        {
+            float r = 1f - (float)(health / maxHealth);
+            indicator.GetComponent<Renderer>().material.color = new Color(r, 1f, 0f, 1f);
+        }
+        else
+        {
+            float g = (health / maxHealth * 2);
+            indicator.GetComponent<Renderer>().material.color = new Color(1f, g, 0f, 1f);
+        }
     }
 }
