@@ -7,37 +7,23 @@ public class AudioController : MonoBehaviour
     public AudioSource MusicBase;
     public AudioSource BossMusic;
 
-    bool BossStart = false;
-
     // Start is called before the first frame update
     void Start()
     {
         BaseMusic();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void BaseMusic()
     {
         MusicBase.Play();
-
-        if (BossStart == true)
-        {
-            BossMusic.Play();
-            BossStart = false;
-        }
-
-
+        print("Dead");
+            BossMusic.Stop();
     }
 
     public void PlayBoss()
     {
-        MusicBase.Play();
+        print("Music");
+        MusicBase.Stop();
         BossMusic.Play();
-        BossStart = true;
     }
 }
