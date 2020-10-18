@@ -24,6 +24,9 @@ TagManager:
   - Bic
   - Door
   - BossDoor
+  - Charger Enemy
+  - Boss Idle Point
+  - Charger Point
   layers:
   - Default
   - TransparentFX
