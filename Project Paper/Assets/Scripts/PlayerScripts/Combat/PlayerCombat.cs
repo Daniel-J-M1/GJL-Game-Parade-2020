@@ -40,6 +40,8 @@ public class PlayerCombat : MonoBehaviour
     bool spraying = false;
     float maxSprayAmmo = 100;
     float sprayAmmo;
+    public AudioSource SwordSwing;
+    public AudioSource InkSpray;
 
     // Start is called before the first frame update
     void Start()
@@ -111,9 +113,7 @@ public class PlayerCombat : MonoBehaviour
                 if (comboDelayTimer < 0)
                     attackState = AttackState.AS_IDLE;
             }
-        }        
-
-        
+        }                
     }
 
     IEnumerator Spray()
@@ -131,13 +131,15 @@ public class PlayerCombat : MonoBehaviour
             if (Input.GetMouseButton(1))
             {
                 StartCoroutine(Spray());
+                InkSpray.Play();
             }
             else
             {
                 transform.rotation = Quaternion.Euler(baseRotation);
                 spraying = false;
                 attackState = AttackState.AS_IDLE;
-            }
+                InkSpray.Stop();
+            }                    
             yield return null;
         }
         else
@@ -145,6 +147,7 @@ public class PlayerCombat : MonoBehaviour
             transform.rotation = Quaternion.Euler(baseRotation);
             spraying = false;
             attackState = AttackState.AS_IDLE;
+            InkSpray.Stop();
         }
         yield return null;
     }
@@ -180,7 +183,7 @@ public class PlayerCombat : MonoBehaviour
 
     IEnumerator Attack(Vector3 rot, Quaternion start)
     {
-        //play sound here
+        SwordSwing.Play();
         Quaternion destination = start * Quaternion.Euler(rot);
         float startTime = Time.time;
         float percentComplete = 0f;

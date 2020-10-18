@@ -7372,6 +7372,14 @@ PrefabInstance:
       propertyPath: ammoText
       value: 
       objectReference: {fileID: 1453772850}
+    - target: {fileID: 2844468617864849269, guid: b3bef9079a31def4aa25d3803f524a7a, type: 3}
+      propertyPath: InkSpray
+      value: 
+      objectReference: {fileID: 1181462988}
+    - target: {fileID: 2844468617864849269, guid: b3bef9079a31def4aa25d3803f524a7a, type: 3}
+      propertyPath: SwordSwing
+      value: 
+      objectReference: {fileID: 834478106}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3bef9079a31def4aa25d3803f524a7a, type: 3}
 --- !u!4 &1014261288 stripped
