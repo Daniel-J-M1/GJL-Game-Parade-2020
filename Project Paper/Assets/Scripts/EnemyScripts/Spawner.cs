@@ -24,8 +24,11 @@ public class Spawner : MonoBehaviour
     int currentWave = 1;
     int killCount = 0;
 
-    float pausePeriod = 10;
-    float pauseTimer = 10;
+    float pausePeriod = 20;
+    float pauseTimer = 20;
+
+    float waveTimer = 30;
+    float maxWaveTimer = 30;
 
     GameObject[] spawnPoints;
 
@@ -69,13 +72,15 @@ public class Spawner : MonoBehaviour
         }
         if (!paused)
         {
+            waveTimer -= Time.deltaTime;
             waveTimerText.text = "Wave: " + (currentWave - 1).ToString();
-            if (currentlyAlive <= 0)
+            if (currentlyAlive <= 0 || waveTimer <= 0)
             {
+                waveTimer = maxWaveTimer;
                 switch (currentWave)
                 {
                     case 1:
-                        enemyCount = 2;
+                        enemyCount = 4;
                         spawnerEnemyCount = 0;
                         chargerEnemyCount = 0;
                         StartCoroutine(SpawnWave(enemyCount, spawnerEnemyCount, chargerEnemyCount));
@@ -83,25 +88,25 @@ public class Spawner : MonoBehaviour
                         currentWave++;
                         break;
                     case 2:
-                        enemyCount = 2;
-                        spawnerEnemyCount = 0;
+                        enemyCount = 3;
+                        spawnerEnemyCount = 1;
                         chargerEnemyCount = 0;
                         StartCoroutine(SpawnWave(enemyCount, spawnerEnemyCount, chargerEnemyCount));
                         currentlyAlive += enemyCount + spawnerEnemyCount + chargerEnemyCount;
                         currentWave++;
                         break;
                     case 3:
-                        enemyCount = 2;
+                        enemyCount = 4;
                         spawnerEnemyCount = 0;
-                        chargerEnemyCount = 0;
+                        chargerEnemyCount = 1;
                         StartCoroutine(SpawnWave(enemyCount, spawnerEnemyCount, chargerEnemyCount));
                         currentlyAlive += enemyCount + spawnerEnemyCount + chargerEnemyCount;
                         currentWave++;
                         break;
                     case 4:
                         enemyCount = 2;
-                        spawnerEnemyCount = 0;
-                        chargerEnemyCount = 0;
+                        spawnerEnemyCount = 1;
+                        chargerEnemyCount = 1;
                         StartCoroutine(SpawnWave(enemyCount, spawnerEnemyCount, chargerEnemyCount));
                         currentlyAlive += enemyCount + spawnerEnemyCount + chargerEnemyCount;
                         currentWave++;
@@ -112,36 +117,33 @@ public class Spawner : MonoBehaviour
                         currentWave++;
                         break;
                     case 6:
-                        GameObject.FindGameObjectWithTag("Boss Enemy").GetComponent<BossEnemy>().ActivateBoss();
-                        GameObject.FindGameObjectWithTag("BossDoor").GetComponent<Doors>().OpenDoor();
-                        PlayMusic.PlayBoss();
                         enemyCount = 2;
                         spawnerEnemyCount = 0;
-                        chargerEnemyCount = 0;
+                        chargerEnemyCount = 2;
                         StartCoroutine(SpawnWave(enemyCount, spawnerEnemyCount, chargerEnemyCount));
                         currentlyAlive += enemyCount + spawnerEnemyCount + chargerEnemyCount;
                         currentWave++;
                         break;
                     case 7:
-                        enemyCount = 2;
-                        spawnerEnemyCount = 0;
-                        chargerEnemyCount = 0;
+                        enemyCount = 0;
+                        spawnerEnemyCount = 2;
+                        chargerEnemyCount = 1;
                         StartCoroutine(SpawnWave(enemyCount, spawnerEnemyCount, chargerEnemyCount));
                         currentlyAlive += enemyCount + spawnerEnemyCount + chargerEnemyCount;
                         currentWave++;
                         break;
                     case 8:
-                        enemyCount = 2;
+                        enemyCount = 6;
                         spawnerEnemyCount = 0;
-                        chargerEnemyCount = 0;
+                        chargerEnemyCount = 2;
                         StartCoroutine(SpawnWave(enemyCount, spawnerEnemyCount, chargerEnemyCount));
                         currentlyAlive += enemyCount + spawnerEnemyCount + chargerEnemyCount;
                         currentWave++;
                         break;
                     case 9:
-                        enemyCount = 2;
-                        spawnerEnemyCount = 0;
-                        chargerEnemyCount = 0;
+                        enemyCount = 4;
+                        spawnerEnemyCount = 2;
+                        chargerEnemyCount = 1;
                         StartCoroutine(SpawnWave(enemyCount, spawnerEnemyCount, chargerEnemyCount));
                         currentlyAlive += enemyCount + spawnerEnemyCount + chargerEnemyCount;
                         currentWave++;
@@ -152,32 +154,32 @@ public class Spawner : MonoBehaviour
                         currentWave++;
                         break;
                     case 11:
-                        enemyCount = 2;
+                        enemyCount = 8;
                         spawnerEnemyCount = 0;
-                        chargerEnemyCount = 0;
+                        chargerEnemyCount = 1;
                         StartCoroutine(SpawnWave(enemyCount, spawnerEnemyCount, chargerEnemyCount));
                         currentlyAlive += enemyCount + spawnerEnemyCount + chargerEnemyCount;
                         currentWave++;
                         break;
                     case 12:
-                        enemyCount = 2;
-                        spawnerEnemyCount = 0;
-                        chargerEnemyCount = 0;
+                        enemyCount = 6;
+                        spawnerEnemyCount = 2;
+                        chargerEnemyCount = 1;
                         StartCoroutine(SpawnWave(enemyCount, spawnerEnemyCount, chargerEnemyCount));
                         currentlyAlive += enemyCount + spawnerEnemyCount + chargerEnemyCount;
                         currentWave++;
                         break;
                     case 13:
-                        enemyCount = 2;
+                        enemyCount = 10;
                         spawnerEnemyCount = 0;
-                        chargerEnemyCount = 0;
+                        chargerEnemyCount = 1;
                         StartCoroutine(SpawnWave(enemyCount, spawnerEnemyCount, chargerEnemyCount));
                         currentlyAlive += enemyCount + spawnerEnemyCount + chargerEnemyCount;
                         currentWave++;
                         break;
                     case 14:
-                        enemyCount = 2;
-                        spawnerEnemyCount = 0;
+                        enemyCount = 0;
+                        spawnerEnemyCount = 4;
                         chargerEnemyCount = 0;
                         StartCoroutine(SpawnWave(enemyCount, spawnerEnemyCount, chargerEnemyCount));
                         currentlyAlive += enemyCount + spawnerEnemyCount + chargerEnemyCount;
@@ -189,33 +191,33 @@ public class Spawner : MonoBehaviour
                         currentWave++;
                         break;
                     case 16:
-                        enemyCount = 2;
+                        enemyCount = 15;
                         spawnerEnemyCount = 0;
-                        chargerEnemyCount = 0;
+                        chargerEnemyCount = 2;
                         StartCoroutine(SpawnWave(enemyCount, spawnerEnemyCount, chargerEnemyCount));
                         currentlyAlive += enemyCount + spawnerEnemyCount + chargerEnemyCount;
                         currentWave++;
                         break;
                     case 17:
-                        enemyCount = 2;
-                        spawnerEnemyCount = 0;
-                        chargerEnemyCount = 0;
+                        enemyCount = 8;
+                        spawnerEnemyCount = 4;
+                        chargerEnemyCount = 2;
                         StartCoroutine(SpawnWave(enemyCount, spawnerEnemyCount, chargerEnemyCount));
                         currentlyAlive += enemyCount + spawnerEnemyCount + chargerEnemyCount;
                         currentWave++;
                         break;
                     case 18:
-                        enemyCount = 2;
-                        spawnerEnemyCount = 0;
-                        chargerEnemyCount = 0;
+                        enemyCount = 12;
+                        spawnerEnemyCount = 3;
+                        chargerEnemyCount = 3;
                         StartCoroutine(SpawnWave(enemyCount, spawnerEnemyCount, chargerEnemyCount));
                         currentlyAlive += enemyCount + spawnerEnemyCount + chargerEnemyCount;
                         currentWave++;
                         break;
                     case 19:
-                        enemyCount = 2;
-                        spawnerEnemyCount = 0;
-                        chargerEnemyCount = 0;
+                        enemyCount = 10;
+                        spawnerEnemyCount = 6;
+                        chargerEnemyCount = 4;
                         StartCoroutine(SpawnWave(enemyCount, spawnerEnemyCount, chargerEnemyCount));
                         currentlyAlive += enemyCount + spawnerEnemyCount + chargerEnemyCount;
                         currentWave++;
@@ -226,8 +228,10 @@ public class Spawner : MonoBehaviour
                         currentWave++;
                         break;
                     case 21:
-                        currentWave++;
+                        GameObject.FindGameObjectWithTag("Boss Enemy").GetComponent<BossEnemy>().ActivateBoss();
+                        GameObject.FindGameObjectWithTag("BossDoor").GetComponent<Doors>().OpenDoor();
                         PlayMusic.PlayBoss();
+                        currentWave++;
                         break;
                     default:
                         break;

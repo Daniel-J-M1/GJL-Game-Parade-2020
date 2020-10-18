@@ -12,7 +12,7 @@ public class ChargerEnemy : MonoBehaviour
     float chargeSpeed = 50f;
     public bool killed = false;
 
-    float maxHealth = 500f;
+    float maxHealth = 300f;
     public float health;
 
     bool charging = false;

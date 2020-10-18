@@ -64,7 +64,6 @@ public class BossEnemy : MonoBehaviour
         {
             PlayMusic.BaseMusic();
             Destroy(this.gameObject);
-            player.gameObject.GetComponent<Spawner>().Died();
             player.GetComponent<PlayerController>().AlterCash(50);
         }
         if (health > maxHealth / 2)
