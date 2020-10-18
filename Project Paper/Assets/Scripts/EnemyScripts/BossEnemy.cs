@@ -236,6 +236,11 @@ public class BossEnemy : MonoBehaviour
             if (GetChargeState())
                 Destroy(other.gameObject);
         }
+        if (other.tag == "Charger Enemy")
+        {
+            if (GetChargeState())
+                Destroy(other.gameObject);
+        }
     }
 
     public void AlterHealth(float altHP, bool inv)

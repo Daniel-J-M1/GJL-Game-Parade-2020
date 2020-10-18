@@ -27,6 +27,7 @@ TagManager:
   - Charger Enemy
   - Boss Idle Point
   - Charger Point
+  - Enemy Projectile
   layers:
   - Default
   - TransparentFX

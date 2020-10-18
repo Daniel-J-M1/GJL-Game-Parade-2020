@@ -80,5 +80,28 @@ public class WeaponCollider : MonoBehaviour
                 playerCombat.SetAmmo(baseAmmoGain * 1.5f);
             }
         }
+
+        if (other.gameObject.tag == "Charger Enemy")
+        {
+            PlayerCombat playerCombat = GameObject.FindGameObjectWithTag("Weapon").GetComponent<PlayerCombat>();
+
+            if (playerCombat.attackState == PlayerCombat.AttackState.AS_ATTACK1)
+            {
+                other.gameObject.GetComponent<ChargerEnemy>().AlterHealth(-baseDamage, false);
+                playerCombat.SetAmmo(baseAmmoGain * 1.5f);
+            }
+
+            if (playerCombat.attackState == PlayerCombat.AttackState.AS_ATTACK2)
+            {
+                other.gameObject.GetComponent<ChargerEnemy>().AlterHealth(-baseDamage * 1.5f, false);
+                playerCombat.SetAmmo(baseAmmoGain * 2f);
+            }
+
+            if (playerCombat.attackState == PlayerCombat.AttackState.AS_ATTACK3)
+            {
+                other.gameObject.GetComponent<ChargerEnemy>().AlterHealth(-baseDamage * 3, false);
+                playerCombat.SetAmmo(baseAmmoGain * 2.5f);
+            }
+        }
     }
 }
