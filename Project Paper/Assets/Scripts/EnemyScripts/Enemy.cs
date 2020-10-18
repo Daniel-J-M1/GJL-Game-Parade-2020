@@ -42,6 +42,7 @@ public class Enemy : MonoBehaviour
             Destroy(this.gameObject);
             Player.gameObject.GetComponent<Spawner>().Died();
             Killed = true;
+            Player.GetComponent<PlayerController>().AlterCash(2);
         }
         if (Health > maxHealth / 2)
         {
@@ -80,7 +81,15 @@ public class Enemy : MonoBehaviour
         if (other.tag == "Projectile")
         {
             AlterHealth(-5, false);
+            KnockBack(2);
         }
+
+        if (other.tag == "PlayerBody")
+        {
+            PlayerController playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+            playerController.AlterHealth(-5, true);
+        }
+
     }
 
     private void FixedUpdate()

@@ -78,7 +78,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 9021585803772053676, guid: 0fb5c54e98954ff4b9d7aeff640c5bac, type: 3}
   moveSpeed: 10
-  health: 300
+  health: 150
   maxIvincibilityTime: 0.2
 --- !u!1 &7769831259339691169
 GameObject:
