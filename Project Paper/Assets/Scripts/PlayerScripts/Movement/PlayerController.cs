@@ -12,13 +12,15 @@ public class PlayerController : MonoBehaviour
     Vector3 playerRotation;
     Rigidbody body;
     PlayerCombat playerCombat;
+
     bool dashing = false;
     int dashChargeCount;
     float dashChargeCooldown;
+    float maxDashCooldown;
 
     bool invincible = false;
     float invTimer = 0;
-    float maxInvTimer = 0.3f;
+    float maxInvTimer = 0.1f;
 
     public Slider healthBar;
     public Image dashImg1;
@@ -33,18 +35,22 @@ public class PlayerController : MonoBehaviour
         playerCombat = GameObject.FindGameObjectWithTag("Weapon").GetComponent<PlayerCombat>();
         body = GetComponent<Rigidbody>();
         dashChargeCount = 2;
-        dashChargeCooldown = 2;
+        maxDashCooldown = 2;
+        dashChargeCooldown = maxDashCooldown;
 
         //health bar settings
         health = maxHealth;
         healthBar.maxValue = maxHealth;
         healthBar.value = maxHealth;
-        cash = 0;
+        cash = 100;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (health > maxHealth)
+            health = maxHealth;
+
         UpdateHealthIndicator();
 
         Color colorActive = new Color(1f, 1f, 1f, 1f);
@@ -94,7 +100,7 @@ public class PlayerController : MonoBehaviour
         else if(dashChargeCooldown <= 0 && dashChargeCount < 2)
         {
             dashChargeCount++;
-            dashChargeCooldown = 2;
+            dashChargeCooldown = maxDashCooldown;
         }
 
         if (Input.GetKeyDown("left shift") && dashChargeCount > 0)
@@ -147,6 +153,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public float GetHealth()
+    {
+        return health;
+    }
+
+    public float GetMaxHealth()
+    {
+        return maxHealth;
+    }
+
     public float GetCash()
     {
         return cash;
@@ -155,6 +171,11 @@ public class PlayerController : MonoBehaviour
     public void AlterCash(int amount)
     {
         cash += amount;
+    }
+
+    public void SetDashCooldown(float amount)
+    {
+        maxDashCooldown += amount;
     }
 
     void UpdateHealthIndicator()

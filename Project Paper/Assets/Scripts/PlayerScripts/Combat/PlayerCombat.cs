@@ -55,8 +55,11 @@ public class PlayerCombat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ammoText.text = sprayAmmo.ToString();
+        int ammoToInt = (int)sprayAmmo;
+        ammoText.text = ammoToInt.ToString();
         ammoSlider.value = sprayAmmo;
+        ammoSlider.maxValue = maxSprayAmmo;
+
         penTip = GameObject.FindGameObjectWithTag("PenTip");
         float swingMultiplier = 100;
         swingMultiplier *= swingSpeed;
@@ -199,7 +202,23 @@ public class PlayerCombat : MonoBehaviour
     public void SetAmmo(float amount)
     {
         sprayAmmo += amount;
-        if (sprayAmmo > 100)
-            sprayAmmo = 100;
+        if (sprayAmmo > maxSprayAmmo)
+            sprayAmmo = maxSprayAmmo;
     }
+
+    public void SetMaxAmmo(float amount)
+    {
+        maxSprayAmmo += amount;
+    }
+    
+    public void SetSwingSpeed(float amount)
+    {
+        swingSpeed *= amount;
+    }
+
+    public float GetSwingSpeed()
+    {
+        return swingSpeed;
+    }
+    
 }

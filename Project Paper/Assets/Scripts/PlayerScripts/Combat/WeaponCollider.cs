@@ -6,6 +6,7 @@ public class WeaponCollider : MonoBehaviour
 {
     public float knockbackStrength = 300;
     public float baseDamage = 20;
+    public float baseAmmoGain = 2;
     // Start is called before the first frame update
     private void OnTriggerEnter(Collider other)
     {
@@ -16,19 +17,19 @@ public class WeaponCollider : MonoBehaviour
             if (playerCombat.attackState == PlayerCombat.AttackState.AS_ATTACK1)
             {
                 other.gameObject.GetComponent<SpawnerEnemy>().AlterHealth(-baseDamage, false);
-                playerCombat.SetAmmo(3);
+                playerCombat.SetAmmo(baseAmmoGain * 1.5f);
             }
 
             if (playerCombat.attackState == PlayerCombat.AttackState.AS_ATTACK2)
             {
                 other.gameObject.GetComponent<SpawnerEnemy>().AlterHealth(-baseDamage * 1.5f, false);
-                playerCombat.SetAmmo(3);
+                playerCombat.SetAmmo(baseAmmoGain * 1.5f);
             }
 
             if (playerCombat.attackState == PlayerCombat.AttackState.AS_ATTACK3)
             {
                 other.gameObject.GetComponent<SpawnerEnemy>().AlterHealth(-baseDamage * 3, false);
-                playerCombat.SetAmmo(4);
+                playerCombat.SetAmmo(baseAmmoGain * 2f);
             }
         }
 
@@ -39,19 +40,19 @@ public class WeaponCollider : MonoBehaviour
             if (playerCombat.attackState == PlayerCombat.AttackState.AS_ATTACK1)
             {
                 other.gameObject.GetComponent<BossEnemy>().AlterHealth(-baseDamage, false);
-                playerCombat.SetAmmo(4);
+                playerCombat.SetAmmo(baseAmmoGain * 2f);
             }
 
             if (playerCombat.attackState == PlayerCombat.AttackState.AS_ATTACK2)
             {
                 other.gameObject.GetComponent<BossEnemy>().AlterHealth(-baseDamage * 1.5f, false);
-                playerCombat.SetAmmo(5);
+                playerCombat.SetAmmo(baseAmmoGain * 2.5f);
             }
 
             if (playerCombat.attackState == PlayerCombat.AttackState.AS_ATTACK3)
             {
                 other.gameObject.GetComponent<BossEnemy>().AlterHealth(-baseDamage * 3, false);
-                playerCombat.SetAmmo(7);
+                playerCombat.SetAmmo(baseAmmoGain * 3.5f);
             }
         }
 
@@ -64,19 +65,19 @@ public class WeaponCollider : MonoBehaviour
             {
                 other.gameObject.GetComponent<Enemy>().AlterHealth(-baseDamage, true);
                 other.gameObject.GetComponent<Enemy>().KnockBack(knockbackStrength);
-                playerCombat.SetAmmo(2);
+                playerCombat.SetAmmo(baseAmmoGain);
             }
             if (playerCombat.attackState == PlayerCombat.AttackState.AS_ATTACK2)
             {
                 other.gameObject.GetComponent<Enemy>().AlterHealth(-baseDamage * 1.5f, true);
                 other.gameObject.GetComponent<Enemy>().KnockBack(knockbackStrength);
-                playerCombat.SetAmmo(2);
+                playerCombat.SetAmmo(baseAmmoGain);
             }
             if (playerCombat.attackState == PlayerCombat.AttackState.AS_ATTACK3)
             {
                 other.gameObject.GetComponent<Enemy>().AlterHealth(-baseDamage * 3, true);
                 other.gameObject.GetComponent<Enemy>().KnockBack(knockbackStrength);
-                playerCombat.SetAmmo(3);
+                playerCombat.SetAmmo(baseAmmoGain * 1.5f);
             }
         }
     }

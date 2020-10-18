@@ -8,13 +8,6 @@ public class BreakObject : MonoBehaviour
     public GameObject Fractured;
     public float Shatter;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown("f"))
-            BreakAsset();
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.name == "BiCPen")
