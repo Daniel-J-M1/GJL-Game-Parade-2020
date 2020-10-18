@@ -28,6 +28,9 @@ TagManager:
   - Boss Idle Point
   - Charger Point
   - UIUpgrade
+  - Boss Active Point
+  - Start Point
+  - Enemy Projectile
   layers:
   - Default
   - TransparentFX

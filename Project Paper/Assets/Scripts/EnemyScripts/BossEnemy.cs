@@ -22,10 +22,10 @@ public class BossEnemy : MonoBehaviour
     float currentDelay;
     bool spawning = false;
     float currEnemiesSpawned = 0;
-    float maxEnemiesSpawned = 2;
+    float maxEnemiesSpawned = 1;
 
     public float chargeSpeed = 50f;
-    public float maxSpeed = 10f;
+    public float speed = 10f;
 
     float maxHealth;
     public float health = 5000f;
@@ -35,6 +35,9 @@ public class BossEnemy : MonoBehaviour
     float invincibleTimer;
     bool wallHit = false;
 
+    bool isActive;
+    bool activating;
+
     Transform indicator;
 
     // Start is called before the first frame update
@@ -42,12 +45,15 @@ public class BossEnemy : MonoBehaviour
     {
         // Assigning Variable Values
         player = GameObject.FindGameObjectWithTag("Player");
+        PlayMusic = player.GetComponent<AudioController>();
         body = GetComponent<Rigidbody>();
         maxHealth = health;
         indicator = transform.Find("Indicator");
         moving = false;
         attacking = false;
         currentDelay = 0;
+        isActive = false;
+        activating = false;
     }
 
     // Update is called once per frame
@@ -56,7 +62,7 @@ public class BossEnemy : MonoBehaviour
         currentDelay -= Time.deltaTime;
         if (health <= 0)
         {
-            //PlayMusic.BaseMusic();
+            PlayMusic.BaseMusic();
             Destroy(this.gameObject);
             player.gameObject.GetComponent<Spawner>().Died();
             player.GetComponent<PlayerController>().AlterCash(50);
@@ -73,24 +79,59 @@ public class BossEnemy : MonoBehaviour
         }
 
 
-        if (!moving && !attacking && !spawning)
+        if (isActive)
         {
-            GameObject randomPoint = GetRandomPoint();   
-            StartCoroutine(Wander(randomPoint));
-        }
-        if (isInvincible)
-        {
-            invincibleTimer -= Time.deltaTime;
-            if (invincibleTimer <= 0)
+            speed = 10f;
+            if (!moving && !attacking && !spawning)
             {
-                ResetInvincible();
+                GameObject randomPoint = GetRandomPoint();
+                StartCoroutine(Wander(randomPoint));
+            }
+            if (isInvincible)
+            {
+                invincibleTimer -= Time.deltaTime;
+                if (invincibleTimer <= 0)
+                {
+                    ResetInvincible();
+                }
+            }
+        }
+        else
+        {
+            speed = 5f;
+            if (!moving)
+            {
+                GameObject randomPoint = GetRandomIdlePoint();
+                StartCoroutine(Wander(randomPoint));
             }
         }
     }
 
+    public void ActivateBoss()
+    {
+        GameObject randomPoint = GameObject.FindGameObjectWithTag("Boss Active Point");
+        activating = true;
+        StartCoroutine(Wander(randomPoint));
+    }
+
+    GameObject GetRandomIdlePoint()
+    {
+        GameObject[] randomPoints = GameObject.FindGameObjectsWithTag("Boss Idle Point");
+        int randPointNew = -1;
+        randPointNew = Random.Range(0, randomPoints.Length);
+
+        while (randPointNew == currentPoint)
+        {
+            randPointNew = Random.Range(0, randomPoints.Length);
+        }
+        currentPoint = randPointNew;
+
+        return randomPoints[currentPoint];
+    }
+
     GameObject GetRandomPoint()
     {
-        GameObject[] randomPoints = GameObject.FindGameObjectsWithTag("Spawn Point");
+        GameObject[] randomPoints = GameObject.FindGameObjectsWithTag("Charger Point");
         int randPointNew = -1;
         randPointNew = Random.Range(0, randomPoints.Length);
 
@@ -110,6 +151,12 @@ public class BossEnemy : MonoBehaviour
         return transform.position + offset;
     }
 
+    Vector3 GetRandomPosition()
+    {
+        Vector3 offset = Random.insideUnitCircle * 5;
+        offset.y = 0f;
+        return transform.position + offset;
+    }
     IEnumerator ChargeAttack()
     {
         attacking = true;
@@ -142,38 +189,26 @@ public class BossEnemy : MonoBehaviour
         yield return null;
     }
 
-    IEnumerator SpawnEnemies()
+    void SpawnEnemies()
     {
-        spawning = true;
-        float timer = 0.5f;
-
-        while (timer > 0)
+        spawning = false;
+        for (int i = 0; i <= maxEnemiesSpawned; i++)
         {
-            timer -= Time.deltaTime;
-            yield return null;
-        }
-        if (currEnemiesSpawned < maxEnemiesSpawned)
-        {
-            Instantiate(enemy, GetPointInRadious(), Quaternion.identity);
-            StartCoroutine(SpawnEnemies());
+            Spawner sp = player.transform.GetComponent<Spawner>();
+            sp.IncrementEnemyCount();
+            Instantiate(enemy, GetRandomPosition(), Quaternion.identity);
             currEnemiesSpawned++;
         }
-        else
-        {
-            attacking = false;
-            moving = false;
-            spawning = false;
-            currEnemiesSpawned = 0;
-            maxEnemiesSpawned = 2 + Random.Range(-1, 1);
-        }
-        yield return null;
     }
 
     IEnumerator Wander(GameObject walkPoint)
     {
         moving = true;
         float timer = 1.5f;
-        transform.LookAt(new Vector3(walkPoint.transform.position.x, transform.position.y, walkPoint.transform.position.z));
+        if (activating)
+            timer = 4;
+
+            transform.LookAt(new Vector3(walkPoint.transform.position.x, transform.position.y, walkPoint.transform.position.z));
         while (timer > 0)
         {
             timer -= Time.deltaTime;
@@ -181,24 +216,37 @@ public class BossEnemy : MonoBehaviour
             Direction.Normalize();
             Direction.y = 0;            
 
-            body.MovePosition(transform.position + Direction * maxSpeed * Time.deltaTime);
+            body.MovePosition(transform.position + Direction * speed * Time.deltaTime);
             yield return null;
         }
         currMoveCount++;
-        if(currentDelay < 0)
+        if (isActive)
         {
-            currentDelay = spawnerDelay;
-            StartCoroutine(SpawnEnemies());
+            if (currentDelay < 0)
+            {
+                currentDelay = spawnerDelay;
+                SpawnEnemies();
+            }
+            else if (currMoveCount <= maxMoveCount)
+            {
+                StartCoroutine(Wander(GetRandomPoint()));
+            }
+            else
+            {
+                currMoveCount = 0;
+                moving = false;
+                StartCoroutine(ChargeAttack());
+            }
         }
-        else if (currMoveCount <= maxMoveCount)
+        else 
         {
-            StartCoroutine(Wander(GetRandomPoint()));
-        }
-        else
-        {
-            currMoveCount = 0;
             moving = false;
-            StartCoroutine(ChargeAttack());
+        }
+
+        if (activating)
+        {
+            isActive = true;
+            currentDelay = spawnerDelay;
         }
         yield return null;
     }

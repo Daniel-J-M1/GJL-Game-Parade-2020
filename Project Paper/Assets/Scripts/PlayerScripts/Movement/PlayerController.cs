@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    public float maxHealth = 100;
-    public float health = 100;
+    public float maxHealth = 200;
+    public float health = 200;
     public float speed = 10;
     Vector3 playerRotation;
     Rigidbody body;
@@ -42,12 +44,15 @@ public class PlayerController : MonoBehaviour
         health = maxHealth;
         healthBar.maxValue = maxHealth;
         healthBar.value = maxHealth;
-        cash = 100;
+        cash = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (health <= 0)
+            SceneManager.LoadScene("LoseScreen");
+        
         if (health > maxHealth)
             health = maxHealth;
 
@@ -123,6 +128,7 @@ public class PlayerController : MonoBehaviour
                 invincible = false;
             }
         }
+
     }
 
     IEnumerator Dash(Vector3 movement)
@@ -199,6 +205,15 @@ public class PlayerController : MonoBehaviour
         {
             AlterHealth(-2, false);
             Destroy(other.gameObject);
+        }
+        
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Area" && !transform.GetComponent<Spawner>().GetPaused())
+        {
+            transform.position = GameObject.FindGameObjectWithTag("Start Point").gameObject.transform.position;
         }
     }
 }

@@ -11,11 +11,13 @@ public class SpawnerEnemy : MonoBehaviour
 
     bool moving = false;
     bool spawning = false;
+    float spawnCooldown = 1;
+    float maxSpawnCooldown = 7;
 
     int maxMoveCount = 3;
     int currMoveCount = 3;
 
-    int maxEnemiesSpawned = 2;
+    int maxEnemiesSpawned = 1;
     int currEnemiesSpawned = 0;
 
     public float moveSpeed = 10f;
@@ -57,12 +59,15 @@ public class SpawnerEnemy : MonoBehaviour
             float g = (health / maxHealth * 2);
             indicator.GetComponent<Renderer>().material.color = new Color(1f, g, 0f, 1f);
         }
-        if(spawning)
-        {
-            indicator.GetComponent<Renderer>().material.color = new Color(0, 0, 1f);
-        }
 
-        if(!moving && !spawning)
+        spawnCooldown -= Time.deltaTime;
+        if (!moving && spawnCooldown < 0)
+        {
+            if (player.gameObject.GetComponent<Spawner>().GetEnemyCount() < 50)
+                SpawnEnemies();
+            spawnCooldown = maxSpawnCooldown;
+        }    
+        else if(!moving && spawnCooldown > 0)
         {
             GameObject randomPoint = GetRandomPoint();
             StartCoroutine(Wander(randomPoint));
@@ -85,31 +90,15 @@ public class SpawnerEnemy : MonoBehaviour
         return transform.position + offset;
     }
 
-    IEnumerator SpawnEnemies()
+    void SpawnEnemies()
     {
-        spawning = true;
-        float timer = 0.5f;
-        
-        while(timer > 0)
+        for (int i = 0; i <= maxEnemiesSpawned; i++)
         {
-            timer -= Time.deltaTime;
-            yield return null;
-        }
-        if (currEnemiesSpawned < maxEnemiesSpawned)
-        {
-
+            Spawner sp = player.transform.GetComponent<Spawner>();
+            sp.IncrementEnemyCount();
             Instantiate(enemy, GetRandomPosition(), Quaternion.identity);
-            StartCoroutine(SpawnEnemies());
             currEnemiesSpawned++;
         }
-        else
-        {
-            spawning = false;
-            currEnemiesSpawned = 0;
-            maxEnemiesSpawned = 3 + Random.Range(-1, 1);
-        }
-
-        yield return null;
     }
 
     IEnumerator Wander(GameObject spawnPos)
@@ -128,20 +117,7 @@ public class SpawnerEnemy : MonoBehaviour
             body.MovePosition(transform.position + Direction * moveSpeed * Time.deltaTime);
             yield return null;
         }
-        currMoveCount++;
-        if(currMoveCount <= maxMoveCount)
-        {
-            StartCoroutine(Wander(GetRandomPoint()));
-        }
-        else
-        {
-            StartCoroutine(SpawnEnemies());
-            maxMoveCount = 2 + Random.Range(-1, 0);
-            currMoveCount = 0;
-            moving = false;
-
-        }
-
+        moving = false;
         yield return null;
     }
 

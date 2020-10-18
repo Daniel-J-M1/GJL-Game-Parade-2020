@@ -16,8 +16,7 @@ public class AudioController : MonoBehaviour
     public void BaseMusic()
     {
         MusicBase.Play();
-        print("Dead");
-            BossMusic.Stop();
+        BossMusic.Stop();
     }
 
     public void PlayBoss()
