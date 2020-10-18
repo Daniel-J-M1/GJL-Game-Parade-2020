@@ -13,12 +13,12 @@ public class BossEnemy : MonoBehaviour
     private AudioController PlayMusic;
 
     bool moving = false;
-    int maxMoveCount = 1;
+    int maxMoveCount = 3;
     int currMoveCount = 0;
     bool attacking = false;
 
 
-    public float spawnerDelay = 10;
+    public float spawnerDelay = 15;
     float currentDelay;
     bool spawning = false;
     float currEnemiesSpawned = 0;
@@ -169,15 +169,15 @@ public class BossEnemy : MonoBehaviour
         yield return null;
     }
 
-    IEnumerator Wander(GameObject spawnPos)
+    IEnumerator Wander(GameObject walkPoint)
     {
         moving = true;
-        float timer = 3;
+        float timer = 1.5f;
+        transform.LookAt(new Vector3(walkPoint.transform.position.x, transform.position.y, walkPoint.transform.position.z));
         while (timer > 0)
         {
             timer -= Time.deltaTime;
-            Vector3 Direction = spawnPos.transform.position - transform.position;
-            transform.LookAt(new Vector3(spawnPos.transform.position.x, transform.position.y, spawnPos.transform.position.z));
+            Vector3 Direction = walkPoint.transform.position - transform.position;
             Direction.Normalize();
             Direction.y = 0;            
 
