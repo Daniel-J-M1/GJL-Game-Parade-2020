@@ -192,4 +192,13 @@ public class PlayerController : MonoBehaviour
             indicator.GetComponent<Renderer>().material.color = new Color(1f, g, 0f, 1f);
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Enemy Projectile")
+        {
+            AlterHealth(-2, false);
+            Destroy(other.gameObject);
+        }
+    }
 }

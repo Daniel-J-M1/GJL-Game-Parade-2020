@@ -7296,6 +7296,10 @@ PrefabInstance:
       propertyPath: BossMusic
       value: 
       objectReference: {fileID: 1880485012}
+    - target: {fileID: 1604393780, guid: b3bef9079a31def4aa25d3803f524a7a, type: 3}
+      propertyPath: paused
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 130176736596839267, guid: b3bef9079a31def4aa25d3803f524a7a, type: 3}
       propertyPath: healthBar
       value: 
@@ -7434,10 +7438,6 @@ PrefabInstance:
     - target: {fileID: 3559161028262556319, guid: e0bde9201457ae44691a4876bcd802c8, type: 3}
       propertyPath: m_Name
       value: Boss Door
-      objectReference: {fileID: 0}
-    - target: {fileID: 3559161028262556319, guid: e0bde9201457ae44691a4876bcd802c8, type: 3}
-      propertyPath: m_TagString
-      value: BossDoor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0bde9201457ae44691a4876bcd802c8, type: 3}

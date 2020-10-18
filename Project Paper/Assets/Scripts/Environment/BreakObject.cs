@@ -14,6 +14,8 @@ public class BreakObject : MonoBehaviour
             BreakAsset();
         if (other.tag == "Boss Enemy")
             BreakAsset();
+        if (other.tag == "Charger Enemy")
+            BreakAsset();
     }
 
     void BreakAsset()
